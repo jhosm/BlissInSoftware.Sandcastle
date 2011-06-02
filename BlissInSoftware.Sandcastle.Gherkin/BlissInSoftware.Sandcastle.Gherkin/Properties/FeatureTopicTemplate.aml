@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<topic id="{0}" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <definitionTable>
+        <definedTerm>{1}</definedTerm>
+        <definition>{2}</definition>
+      </definitionTable>
+    </introduction>
+    <section address="Description">
+      <title>Descrição</title>
+      <content>
+        <para>{3}</para>
+      </content>
+    </section>
+    <section address="Scenarios">
+      <title>Testes de aceitação</title>
+      <content>
+        <code language="cenarios">
+          <![CDATA[{4}]]>
+        </code>
+      </content>
+    </section>
+  </developerConceptualDocument>
+</topic>
