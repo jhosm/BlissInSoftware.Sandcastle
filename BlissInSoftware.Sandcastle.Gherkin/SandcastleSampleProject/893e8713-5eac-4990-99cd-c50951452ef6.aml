@@ -22,7 +22,7 @@
       <content>
         <!-- Uncomment this to create a sub-section outline
         <autoOutline /> -->
-        <para>Add one or more sections with content</para>
+        <para><link xlink:href="0ae19179-72ff-5fa2-612b-96e2ff90595c" />Add one or more sections with content</para>
       </content>
       <!-- If a section contains a sections element, its content creates
            sub-sections.  These are not collapsible.
