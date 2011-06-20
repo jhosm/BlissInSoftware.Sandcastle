@@ -10,10 +10,10 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
 {
     internal class FeatureTopic: Topic
     {
-        internal const string regexPatternIntroduction = @"^.*Funcionalidade:([^\r]+)\r\n(.+?)\r\n\s*\r\n(.+?)Cenário:";
+        internal const string regexPatternIntroduction = @"^.*Funcionalidade:([^\r]+)\r\n(.+?)\r\n\s*\r\n(.+?)(?:(?:@)|(?:Contexto:)|(?:Cenário:))";
         internal const string regexPatternXmlTagHeuristic = @"^\s*<";
-                                                           
-        internal const string regexPatternScenarios = "(Cenário.*)";
+
+        internal const string regexPatternScenarios = "Funcionalidade[^@]+(?:(@.+)|(Contexto:.+)|((?<!Contexto:.+)Cenário:.+))";
 
         public string Name { get; set; }
         public string Summary { get; set; }
