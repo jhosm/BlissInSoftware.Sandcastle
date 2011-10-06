@@ -2,17 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using BlissInSoftware.Sandcastle.Gherkin.Plugin.Properties;
 
 namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
 {
     internal class FeatureSetTopic : Topic
     {
+        public string Introduction { get; set; }
+
         internal override string CreateContent()
         {
             Builder.ReportProgress("Creating topic content for '{0}'...", Title);
 
             string topicTemplate = System.Text.UTF8Encoding.UTF8.GetString(Resources.FeatureSetTopicTemplate);
+
+            if (File.Exists(Path.Combine(SourcePath, "Introduction.aml")))
+            {
+                Introduction = File.ReadAllText(Path.Combine(SourcePath, "Introduction.aml"));
+            }
+            else
+            {
+                Introduction = Title;
+            }
 
             IDictionary<Type, string> featureSetDocumentation = new Dictionary<Type, string>();
 
@@ -51,7 +63,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
                 }
             }
 
-            return String.Format(topicTemplate, Id, Title, featureSetDocumentation[typeof(FeatureSetTopic)], featureSetDocumentation[typeof(FeatureTopic)]);
+            return String.Format(topicTemplate, Id, Introduction, featureSetDocumentation[typeof(FeatureSetTopic)], featureSetDocumentation[typeof(FeatureTopic)]);
 
         }
     }
