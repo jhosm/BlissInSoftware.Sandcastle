@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TechTalk.SpecFlow.Parser.SyntaxElements;
+using System.Text.RegularExpressions;
 
 namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
 {
     public class FeatureTopicContentBuilder
     {
         private Feature feature;
+        private const string EXTRACT_DESCRIPTION = @"^(.*?)(?=^(?:Regras:|GUI:|Notas:):?)";
+        private const string EXTRACT_RULES = @"^Regras:[\r\n]*\s*(.*?)(?=^(?:GUI:|Notas:):?)";
+        private const string EXTRACT_GUI = @"^GUI:[\r\n]*\s*(.*?)(?=^(?:Notas:):?)";
+        private const string EXTRACT_NOTES = @"^Notas:[\r\n]*\s*(.*)";
 
         public FeatureTopicContentBuilder(Feature feature)
         {
@@ -36,15 +41,48 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             string result;
             if (fullDescription.Length > 1)
             {
-                string[] description = new string[fullDescription.Length - 1];
-                Array.ConstrainedCopy(fullDescription, 1, description, 0, description.Length);
-                result = ReplaceCrLfWithBrTag(string.Join(Environment.NewLine, description));
+                string[] descriptionLines = new string[fullDescription.Length - 1];
+                Array.ConstrainedCopy(fullDescription, 1, descriptionLines, 0, descriptionLines.Length);
+
+                string description = string.Join(Environment.NewLine, descriptionLines);
+                result = ExtractDescriptionSection(description, EXTRACT_DESCRIPTION, "");
+                if (result == "") result = description;
+                result = ReplaceCrLfWithBrTag(result);
             }
             else
             {
                 result = "O autor desta história considera que não é necessária descrição.";
             }
             return result;
+        }
+
+        public string BuildRules()
+        {
+            return ExtractDescriptionSection(feature.Description, EXTRACT_RULES);
+        }
+
+        public string BuildGUI()
+        {
+            return ExtractDescriptionSection(feature.Description, EXTRACT_GUI);
+        }
+
+        public string BuildNotes()
+        {
+            return ExtractDescriptionSection(feature.Description, EXTRACT_NOTES);
+        }
+
+
+        private string ExtractDescriptionSection(string description, string sectionExtractionRules)
+        {
+            return ExtractDescriptionSection(description, sectionExtractionRules, "Não aplicável no contexto desta história.");
+        }
+
+        private string ExtractDescriptionSection(string description, string sectionExtractionRules, string defaultResult)
+        {
+            string result = defaultResult;
+            Match rulesMatch = Regex.Match(description, sectionExtractionRules, RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline);
+            if (rulesMatch.Groups[1].Captures.Count > 0) result = rulesMatch.Groups[1].Captures[0].Value;
+            return ReplaceCrLfWithBrTag(result);
         }
 
         public string BuildBackground()
@@ -66,12 +104,9 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             string result = "";
             foreach (var scenario in feature.Scenarios)
             {
-                if (scenario.Tags != null)
+                if (scenario.Tags != null && scenario.Tags.Count > 0)
                 {
-                    if (scenario.Tags.Count > 0)
-                    {
                         result = InsertTags(result, scenario.Tags) + Environment.NewLine;
-                    }
                 }
 
                 foreach (ScenarioStep scenarioStep in scenario.Steps)
@@ -111,5 +146,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
         {
             return input.Replace(Environment.NewLine, "<markup><br /></markup>");
         }
+
     }
 }
+

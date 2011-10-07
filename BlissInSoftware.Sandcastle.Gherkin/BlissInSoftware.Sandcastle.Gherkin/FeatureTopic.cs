@@ -17,6 +17,9 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
         public string Summary { get; set; }
         protected string Description { get; set; }
         protected string Scenarios { get; set; }
+        protected string Rules { get; set; }
+        protected string GUI { get; set; }
+        protected string Notes { get; set; }
         private bool contentIsCreated = false;
 
         internal override string CreateContent()
@@ -36,13 +39,16 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
                 Name = builder.BuildName();
                 Summary = builder.BuildSummary();
                 Description = builder.BuildDescription();
+                Rules = builder.BuildRules();
+                GUI = builder.BuildGUI();
+                Notes = builder.BuildNotes();
                 Scenarios = builder.BuildBackground();
                 Scenarios += builder.BuildScenarios();
 
                 contentIsCreated = true;
             }
             string topicTemplate = System.Text.UTF8Encoding.UTF8.GetString(Resources.FeatureTopicTemplate);
-            return String.Format(topicTemplate, Id, Name, Summary, Description, Scenarios);
+            return String.Format(topicTemplate, Id, Name, Summary, Description, Rules, GUI, Notes, Scenarios);
 	    }
     }
 }

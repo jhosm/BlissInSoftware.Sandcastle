@@ -12,12 +12,32 @@
       <content>
         <para>{3}</para>
       </content>
+      <sections>
+        <section address="SubSection1">
+          <title>Regras e Validações</title>
+          <content>
+            <para>{4}</para>
+          </content>
+        </section>
+        <section address="SubSection2">
+          <title>Écrãs/Impressões</title>
+          <content>
+            <para>{5}</para>
+          </content>
+        </section>
+        <section address="SubSection2">
+          <title>Notas Internas de Implementação</title>
+          <content>
+            <para>{6}</para>
+          </content>
+        </section>
+      </sections> 
     </section>
     <section address="Scenarios">
       <title>Testes de aceitação</title>
       <content>
         <code language="cenarios">
-          <![CDATA[{4}]]>
+          <![CDATA[{7}]]>
         </code>
       </content>
     </section>
