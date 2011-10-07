@@ -95,8 +95,8 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
             FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
 
             Assert.AreEqual(
-                "uma regra" + Environment.NewLine +
-                "duas regras" + Environment.NewLine + Environment.NewLine 
+                "uma regra<markup><br /></markup>" +
+                "duas regras<markup><br /></markup><markup><br /></markup>" 
                 , cut.BuildRules());
         }
 
@@ -125,7 +125,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
             FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
 
             Assert.AreEqual(
-                "uma GUI" + Environment.NewLine 
+                "uma GUI<markup><br /></markup>"
                 , cut.BuildGUI());
         }
 
