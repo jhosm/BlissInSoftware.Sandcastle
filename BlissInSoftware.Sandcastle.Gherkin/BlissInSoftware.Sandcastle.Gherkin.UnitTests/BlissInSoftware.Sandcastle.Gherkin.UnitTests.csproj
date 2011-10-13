@@ -31,6 +31,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Gherkin, Version=2.3.6.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\SpecFlow\Gherkin.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Core, Version=0.44.0.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\SpecFlow\IKVM.OpenJDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Text, Version=0.44.0.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\SpecFlow\IKVM.OpenJDK.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Runtime, Version=0.44.0.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\SpecFlow\IKVM.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\NUnit\bin\net-2.0\framework\nunit.framework.dll</HintPath>
@@ -68,6 +84,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlissInSoftware.Sandcastle.Gherkin.BuildComponent\BlissInSoftware.Sandcastle.Gherkin.BuildComponent.csproj">
+      <Project>{6FD83915-0384-47BD-AE94-134FE2D0D29B}</Project>
+      <Name>BlissInSoftware.Sandcastle.Gherkin.BuildComponent</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlissInSoftware.Sandcastle.Gherkin.Plugin\BlissInSoftware.Sandcastle.Gherkin.Plugin.csproj">
+      <Project>{F21B3AF0-F355-4880-A379-7F12A65EEEEA}</Project>
+      <Name>BlissInSoftware.Sandcastle.Gherkin.Plugin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
