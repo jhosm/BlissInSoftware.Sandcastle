@@ -1,5 +1,0 @@
-G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.BuildComponent\bin\Release\BlissInSoftware.Sandcastle.Gherkin.BuildComponent.dll
-G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.BuildComponent\bin\Release\BlissInSoftware.Sandcastle.Gherkin.BuildComponent.pdb
-G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.BuildComponent\obj\Release\ResolveAssemblyReference.cache
-G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.BuildComponent\obj\Release\BlissInSoftware.Sandcastle.Gherkin.BuildComponent.dll
-G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.BuildComponent\obj\Release\BlissInSoftware.Sandcastle.Gherkin.BuildComponent.pdb

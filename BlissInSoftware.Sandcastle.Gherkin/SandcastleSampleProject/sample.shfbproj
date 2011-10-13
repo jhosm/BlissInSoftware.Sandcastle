@@ -26,7 +26,10 @@
           </gherkinFeatures>
         </configuration>
       </PlugInConfig>
-<PlugInConfig id="Additional Content Only" enabled="True"><configuration /></PlugInConfig></PlugInConfigurations>
+      <PlugInConfig id="Additional Content Only" enabled="True">
+        <configuration />
+      </PlugInConfig>
+    </PlugInConfigurations>
     <HelpFileFormat>Website</HelpFileFormat>
     <PresentationStyle>vs2005</PresentationStyle>
   </PropertyGroup>

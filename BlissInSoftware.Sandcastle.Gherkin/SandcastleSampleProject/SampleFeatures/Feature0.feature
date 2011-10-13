@@ -12,6 +12,8 @@ Esta é uma grande descrição.
 </mediaLink>
 
 Segundo parágrafo da descrição.
+
+Terceiro parágrafo da descrição.
   
 Cenário: Adicionar dois números
     Dado que eu digitei 50 na calculadora
