@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files\Sandcastle\ProductionTools\BuildAssembler.exe</StartProgram>
+    <StartArguments>/config:sandcastle.config manifest.xml</StartArguments>
+    <StartWorkingDirectory>C:\Users\Dev\Documents\Visual Studio 2010\Projects\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\TestComponent\</StartWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ProjectView>ShowAllFiles</ProjectView>
+  </PropertyGroup>
+</Project>

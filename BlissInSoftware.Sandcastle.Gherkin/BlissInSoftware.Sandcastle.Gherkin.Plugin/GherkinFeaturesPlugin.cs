@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
 {
-    public class GherkingFeaturesPlugin : SandcastleBuilder.Utils.PlugIn.IPlugIn
+    public class GherkinFeaturesPlugin : SandcastleBuilder.Utils.PlugIn.IPlugIn
     {
         #region Private data members
         //=====================================================================
@@ -226,7 +226,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
         /// This handles garbage collection to ensure proper disposal of the
         /// plug-in if not done explicity with <see cref="Dispose()"/>.
         /// </summary>
-        ~GherkingFeaturesPlugin()
+        ~GherkinFeaturesPlugin()
         {
             // TODO: Change the name of this method to your plug-in name
             this.Dispose(false);

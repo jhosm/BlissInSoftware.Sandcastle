@@ -86,10 +86,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlissInSoftware.Sandcastle.Gherkin.BuildComponent\BlissInSoftware.Sandcastle.Gherkin.BuildComponent.csproj">
-      <Project>{6FD83915-0384-47BD-AE94-134FE2D0D29B}</Project>
-      <Name>BlissInSoftware.Sandcastle.Gherkin.BuildComponent</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BlissInSoftware.Sandcastle.Gherkin.Plugin\BlissInSoftware.Sandcastle.Gherkin.Plugin.csproj">
       <Project>{F21B3AF0-F355-4880-A379-7F12A65EEEEA}</Project>
       <Name>BlissInSoftware.Sandcastle.Gherkin.Plugin</Name>
