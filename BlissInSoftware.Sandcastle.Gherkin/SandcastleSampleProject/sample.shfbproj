@@ -22,14 +22,11 @@
       <PlugInConfig id="Gherkin Features" enabled="True">
         <configuration>
           <gherkinFeatures>
-            <path>C:\Users\Dev\Documents\Visual Studio 2010\Projects\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\SandcastleSampleProject\SampleFeatures</path>
+            <path>.\SampleFeatures</path>
           </gherkinFeatures>
         </configuration>
       </PlugInConfig>
-      <PlugInConfig id="Additional Content Only" enabled="True">
-        <configuration />
-      </PlugInConfig>
-    </PlugInConfigurations>
+<PlugInConfig id="Additional Content Only" enabled="True"><configuration /></PlugInConfig></PlugInConfigurations>
     <HelpFileFormat>Website</HelpFileFormat>
     <PresentationStyle>vs2005</PresentationStyle>
   </PropertyGroup>

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
+namespace BlissInSoftware.Sandcastle.Gherkin
 {
-    internal enum TopicType
+    public enum TopicType
     {
         FeatureSet,
         Feature

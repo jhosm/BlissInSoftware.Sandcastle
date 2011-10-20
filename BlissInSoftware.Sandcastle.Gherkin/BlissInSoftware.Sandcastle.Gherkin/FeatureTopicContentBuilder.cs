@@ -5,7 +5,7 @@ using System.Text;
 using TechTalk.SpecFlow.Parser.SyntaxElements;
 using System.Text.RegularExpressions;
 
-namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
+namespace BlissInSoftware.Sandcastle.Gherkin
 {
     public class FeatureTopicContentBuilder
     {

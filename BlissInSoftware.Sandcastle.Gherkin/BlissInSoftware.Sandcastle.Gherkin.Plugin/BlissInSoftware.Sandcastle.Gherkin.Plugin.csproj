@@ -61,9 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContentGenerator.cs" />
-    <Compile Include="FeatureSetTopic.cs" />
-    <Compile Include="FeatureTopic.cs" />
-    <Compile Include="FeatureTopicContentBuilder.cs" />
+    <Compile Include="FeatureContentCreator.cs" />
     <Compile Include="GherkinFeaturesConfigDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,14 +69,13 @@
       <DependentUpon>GherkinFeaturesConfigDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="GherkinFeaturesPlugin.cs" />
+    <Compile Include="IFeatureVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Topic.cs" />
-    <Compile Include="TopicType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BlissInSoftware.Sandcastle.snk" />
@@ -95,6 +92,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.csproj">
+      <Project>{3784EAB6-5840-4996-AB43-C01B644DEFA3}</Project>
+      <Name>BlissInSoftware.Sandcastle.Gherkin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

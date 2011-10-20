@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6FD83915-0384-47BD-AE94-134FE2D0D29B}</ProjectGuid>
+    <ProjectGuid>{3784EAB6-5840-4996-AB43-C01B644DEFA3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlissInSoftware.Sandcastle.Gherkin.BuildComponents</RootNamespace>
-    <AssemblyName>BlissInSoftware.Sandcastle.Gherkin.BuildComponents</AssemblyName>
+    <RootNamespace>BlissInSoftware.Sandcastle.Gherkin</RootNamespace>
+    <AssemblyName>BlissInSoftware.Sandcastle.Gherkin</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -37,28 +37,27 @@
     <AssemblyOriginatorKeyFile>..\..\BlissInSoftware.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BuildAssemblerLibrary">
-      <HintPath>..\lib\Sandcastle\BuildAssemblerLibrary.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="SandcastleBuilder.Utils">
+      <HintPath>..\lib\Sandcastle\SandcastleBuilder.Utils.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TechTalk.SpecFlow.Parser">
+      <HintPath>..\lib\SpecFlow\TechTalk.SpecFlow.Parser.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GherkinResolveLinksComponent.cs" />
+    <Compile Include="FeatureSetTopic.cs" />
+    <Compile Include="FeatureTopic.cs" />
+    <Compile Include="FeatureTopicContentBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.csproj">
-      <Project>{3784EAB6-5840-4996-AB43-C01B644DEFA3}</Project>
-      <Name>BlissInSoftware.Sandcastle.Gherkin</Name>
-    </ProjectReference>
+    <Compile Include="Topic.cs" />
+    <Compile Include="TopicType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

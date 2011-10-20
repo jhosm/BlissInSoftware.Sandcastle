@@ -7,7 +7,7 @@ using System.IO;
 using TechTalk.SpecFlow.Parser;
 using TechTalk.SpecFlow.Parser.SyntaxElements;
 using System.Globalization;
-using BlissInSoftware.Sandcastle.Gherkin.Plugin;
+using BlissInSoftware.Sandcastle.Gherkin;
 
 namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
 {

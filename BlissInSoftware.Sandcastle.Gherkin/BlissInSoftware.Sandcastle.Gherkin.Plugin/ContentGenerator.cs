@@ -7,6 +7,7 @@ using System.IO;
 using System.Xml;
 using BlissInSoftware.Sandcastle.Gherkin.Plugin.Properties;
 using System.Security.Cryptography;
+using BlissInSoftware.Sandcastle.Gherkin;
 
 namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
 {
@@ -47,6 +48,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
                 RootTopic = Topic.Create(builder, TopicType.FeatureSet, CreateTopicId("Features"), "Features", gherkinFeaturesPath);
                 BuildTopicsTree(gherkinFeaturesPath, RootTopic);
             }
+            RootTopic.Load();
             return RootTopic;
         }
 
@@ -82,7 +84,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
 
         }
 
-        private void GenerateContentFile(Topic RootTopic)
+        private void GenerateContentFile(Topic rootTopic)
         {
             builder.ReportProgress("Writing content file to: " + ContentFile + "..."); 
             
@@ -91,12 +93,12 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             doc.AppendChild(rootNode);
 
             var topicElement = doc.CreateElement("Topic");
-            topicElement.SetAttribute("id", RootTopic.Id);
+            topicElement.SetAttribute("id", rootTopic.Id);
             topicElement.SetAttribute("visible", XmlConvert.ToString(true));
-            topicElement.SetAttribute("title", RootTopic.Title);
+            topicElement.SetAttribute("title", rootTopic.Title);
             rootNode.AppendChild(topicElement);
 
-            GenerateContentFileElements(topicElement, RootTopic.Children);
+            GenerateContentFileElements(topicElement, rootTopic.Children);
 
             var directory = Path.GetDirectoryName(ContentFile);
             if (!Directory.Exists(directory))
@@ -124,7 +126,8 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             Directory.CreateDirectory(TopicsFolder);
             TopicFiles = new List<string>();
             AddTopicFile(RootTopic);
-            string topicContents = RootTopic.CreateContent();
+            FeatureContentCreator creator = new FeatureContentCreator();
+            string topicContents = creator.Visit((dynamic)RootTopic);
             WriteTopicFile(RootTopic, topicContents);
 
             GenerateTopicFiles(RootTopic.Children);
@@ -135,8 +138,8 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             foreach (var topic in topics)
             {
                 AddTopicFile(topic);
-
-                string topicContents = topic.CreateContent(); 
+                FeatureContentCreator creator = new FeatureContentCreator();
+                string topicContents = creator.Visit((dynamic)topic); 
                 WriteTopicFile(topic, topicContents);
 
                 GenerateTopicFiles(topic.Children);

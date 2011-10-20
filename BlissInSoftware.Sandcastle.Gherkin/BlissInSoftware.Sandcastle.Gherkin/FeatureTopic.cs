@@ -3,26 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using BlissInSoftware.Sandcastle.Gherkin.Plugin.Properties;
 using System.IO;
 using TechTalk.SpecFlow.Parser;
 using TechTalk.SpecFlow.Parser.SyntaxElements;
 using System.Globalization;
 
-namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
+namespace BlissInSoftware.Sandcastle.Gherkin
 {
-    internal class FeatureTopic : Topic
+    public class FeatureTopic : Topic
     {
         public string Name { get; set; }
         public string Summary { get; set; }
-        protected string Description { get; set; }
-        protected string Scenarios { get; set; }
-        protected string Rules { get; set; }
-        protected string GUI { get; set; }
-        protected string Notes { get; set; }
+        public string Description { get; set; }
+        public string Scenarios { get; set; }
+        public string Rules { get; set; }
+        public string GUI { get; set; }
+        public string Notes { get; set; }
         private bool contentIsCreated = false;
 
-        internal override string CreateContent()
+        public override void Load()
 	    {
             Feature feature;
             if (!contentIsCreated)
@@ -47,8 +46,6 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
 
                 contentIsCreated = true;
             }
-            string topicTemplate = System.Text.UTF8Encoding.UTF8.GetString(Resources.FeatureTopicTemplate);
-            return String.Format(topicTemplate, Id, Name, Summary, Description, Rules, GUI, Notes, Scenarios);
 	    }
     }
 }

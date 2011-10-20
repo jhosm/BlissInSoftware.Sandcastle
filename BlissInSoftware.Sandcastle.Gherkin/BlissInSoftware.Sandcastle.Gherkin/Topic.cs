@@ -2,31 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BlissInSoftware.Sandcastle.Gherkin.Plugin.Properties;
 using SandcastleBuilder.Utils.BuildEngine;
 
-namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
+namespace BlissInSoftware.Sandcastle.Gherkin
 {
-    internal abstract class Topic
+    public abstract class Topic
     {
-        protected BuildProcess Builder {get; set;}
-
         protected Topic()
         {
             Children = new List<Topic>();
         }
 
-        internal static Topic Create(BuildProcess builder, TopicType type, string id, string title, string sourcePath)
+        public static Topic Create(BuildProcess builder, TopicType type, string id, string title, string sourcePath)
         {
             switch(type)
             {
                 case TopicType.Feature: { return new FeatureTopic() { Builder = builder, Id = id, Type = type, Title = title, SourcePath = sourcePath }; }
-                case TopicType.FeatureSet: { return new FeatureSetTopic() { Builder = builder, Id = id, Type = type, Title = title, SourcePath = sourcePath }; }     
+                case TopicType.FeatureSet: { return new FeatureSetTopic() { Builder = builder, Id = id, Type = type, Title = title, SourcePath = sourcePath }; }
+                default: return null;
             }
-
-            return null;
         }
 
+        public abstract void Load();
+        protected BuildProcess Builder { get; set; }
         public string Id { get; set; }
         public string Title { get; set; }
         public List<Topic> Children { get; private set; }
@@ -34,6 +32,5 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
         public string SourcePath { get; set; }
         public TopicType Type { get; set; }
 
-        internal abstract string CreateContent();
     }
 }

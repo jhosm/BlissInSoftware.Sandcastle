@@ -206,14 +206,35 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             foreach (var topicFileName in contentGenerator.TopicFiles)
                 AddLinkedItem(BuildAction.None, topicFileName);
 
+           // var componentConfig = GetComponentConfiguration(contentGenerator.IndexFile);
+           // builder.CurrentProject.ComponentConfigurations.Add(GetComponentId(), true, componentConfig);
+
             builder.CurrentProject.MSBuildProject.ReevaluateIfNecessary();
         }
         #endregion
+
+
+        private static string GetComponentId()
+        {
+            return @"GherkinFeaturesResolveLinks";
+        }
+
+        private static string GetComponentConfiguration(string indexFileName)
+        {
+            var id = GetComponentId();
+            const string name = @"XsdDocumentation.BuildComponents.XsdResolveLinksComponent";
+            const string componentDllName = "XsdDocumentation.BuildComponents.dll";
+            var plugInDirectoryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var componentPath = Path.Combine(plugInDirectoryPath, componentDllName);
+            var componentConfig = string.Format(@"<component id=""{0}"" type=""{1}"" assembly=""{2}""><indexFile location=""{3}"" /></component>", id, name, componentPath, indexFileName);
+            return componentConfig;
+        }
 
         private ProjectItem AddLinkedItem(BuildAction buildAction, string fileName)
         {
             var project = builder.CurrentProject.MSBuildProject;
             var itemName = buildAction.ToString();
+            builder.ReportProgress("Adding itemName {0} located at {1} to project...", itemName, fileName);
             var buildItems = project.AddItem(itemName, fileName, new[] { new KeyValuePair<string, string>("Link", fileName) });
             Debug.Assert(buildItems.Count == 1);
             return buildItems[0];

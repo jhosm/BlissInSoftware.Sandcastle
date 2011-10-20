@@ -90,6 +90,10 @@
       <Project>{F21B3AF0-F355-4880-A379-7F12A65EEEEA}</Project>
       <Name>BlissInSoftware.Sandcastle.Gherkin.Plugin</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.csproj">
+      <Project>{3784EAB6-5840-4996-AB43-C01B644DEFA3}</Project>
+      <Name>BlissInSoftware.Sandcastle.Gherkin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

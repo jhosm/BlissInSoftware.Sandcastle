@@ -3,19 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using BlissInSoftware.Sandcastle.Gherkin.Plugin.Properties;
 
-namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
+namespace BlissInSoftware.Sandcastle.Gherkin
 {
-    internal class FeatureSetTopic : Topic
+    public class FeatureSetTopic : Topic
     {
         public string Introduction { get; set; }
 
-        internal override string CreateContent()
+        IDictionary<Type, string> featureSetDocumentation = new Dictionary<Type, string>();
+        public string FeatureSetTopics
+        {
+            get
+            {
+                return featureSetDocumentation[typeof(FeatureSetTopic)];
+            }
+        }
+        public string FeatureTopics
+        {
+            get
+            {
+                return featureSetDocumentation[typeof(FeatureTopic)];
+            }
+        }
+
+
+        public override void Load()
         {
             Builder.ReportProgress("Creating topic content for '{0}'...", Title);
 
-            string topicTemplate = System.Text.UTF8Encoding.UTF8.GetString(Resources.FeatureSetTopicTemplate);
+            featureSetDocumentation = new Dictionary<Type, string>();
 
             if (File.Exists(Path.Combine(SourcePath, "Introduction.aml")))
             {
@@ -26,7 +42,6 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
                 Introduction = Title;
             }
 
-            IDictionary<Type, string> featureSetDocumentation = new Dictionary<Type, string>();
 
             IEnumerable<FeatureSetTopic> featureSetTopics = Children.OfType<FeatureSetTopic>();
             if (featureSetTopics.Count() > 0)
@@ -34,6 +49,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
                 string featureSetTopicsContent = "";
                 foreach (var topic in featureSetTopics)
                 {
+                    topic.Load();
                     featureSetTopicsContent += String.Format("<listItem><para>{0}</para></listItem>", topic.Title);
                 }
                 featureSetDocumentation.Add(typeof(FeatureSetTopic), featureSetTopicsContent);
@@ -45,7 +61,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
                 string featureTopicContents = "<definitionTable>";
                 foreach (var topic in featureTopics)
                 {
-                    topic.CreateContent();
+                    topic.Load();
                     featureTopicContents += "<definedTerm>" + topic.Name + "</definedTerm>";
                     featureTopicContents += "<definition>" + topic.Summary + "</definition>";
                 }
@@ -63,7 +79,6 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
                 }
             }
 
-            return String.Format(topicTemplate, Id, Introduction, featureSetDocumentation[typeof(FeatureSetTopic)], featureSetDocumentation[typeof(FeatureTopic)]);
 
         }
     }
