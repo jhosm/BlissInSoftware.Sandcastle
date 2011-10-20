@@ -26,9 +26,13 @@
           </gherkinFeatures>
         </configuration>
       </PlugInConfig>
-<PlugInConfig id="Additional Content Only" enabled="True"><configuration /></PlugInConfig></PlugInConfigurations>
+      <PlugInConfig id="Additional Content Only" enabled="True">
+        <configuration />
+      </PlugInConfig>
+    </PlugInConfigurations>
     <HelpFileFormat>Website</HelpFileFormat>
     <PresentationStyle>vs2005</PresentationStyle>
+    <CleanIntermediates>False</CleanIntermediates>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in
        order for Visual Studio to perform the build.  The others are optional

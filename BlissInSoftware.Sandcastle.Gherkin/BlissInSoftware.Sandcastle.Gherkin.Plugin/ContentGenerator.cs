@@ -125,12 +125,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
         {
             Directory.CreateDirectory(TopicsFolder);
             TopicFiles = new List<string>();
-            AddTopicFile(RootTopic);
-            FeatureContentCreator creator = new FeatureContentCreator();
-            string topicContents = creator.Visit((dynamic)RootTopic);
-            WriteTopicFile(RootTopic, topicContents);
-
-            GenerateTopicFiles(RootTopic.Children);
+            GenerateTopicFiles( new Topic[1] {RootTopic} );
         }
 
         private void GenerateTopicFiles(IEnumerable<Topic> topics)

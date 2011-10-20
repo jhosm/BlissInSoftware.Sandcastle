@@ -34,11 +34,13 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
             Feature feature = LoadFeature(featureText);
             FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
             Assert.AreEqual(
+                "Cenário: Validador tem acesso à listagem" + Environment.NewLine +
                 "Dado um utilizador com a operação GAS \"keyPapiro_Listagem_BO\"" + Environment.NewLine +
                 "Quando acede à listagem do FE de Validação" + Environment.NewLine +
                 "Então tem acesso concedido." + Environment.NewLine +
                 "" + Environment.NewLine +
-                "@Automated" + Environment.NewLine + 
+                "@Automated" + Environment.NewLine +
+                "Cenário: Validador não tem acesso à listagem" + Environment.NewLine +
                 "Dado um utilizador sem a operação GAS \"keyPapiro_Listagem_BO\"" + Environment.NewLine +
                 "Quando acede à listagem do FE de Validação" + Environment.NewLine +
 	            "Então tem acesso negado."

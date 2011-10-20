@@ -91,10 +91,8 @@ namespace BlissInSoftware.Sandcastle.Gherkin
             Background background = feature.Background;
             if (background != null)
             {
-                foreach (ScenarioStep step in background.Steps)
-                {
-                    result += step.Keyword + step.Text + Environment.NewLine;
-                }
+                result += "Contexto: ";
+                result = BuildSteps(result, background);
             }
             return result;
         }
@@ -109,13 +107,21 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                         result = InsertTags(result, scenario.Tags) + Environment.NewLine;
                 }
 
-                foreach (ScenarioStep scenarioStep in scenario.Steps)
-                {
-                    result += scenarioStep.Keyword + scenarioStep.Text + Environment.NewLine;
-                }
+                result += "Cenário: ";
+                result = BuildSteps(result, scenario);
                 result += Environment.NewLine;
             }
             if (!String.IsNullOrEmpty(result)) result = result.Remove(result.Length - (Environment.NewLine.Length) * 2); 
+            return result;
+        }
+
+        private static string BuildSteps(string result, dynamic scenario)
+        {
+            result += scenario.Title + Environment.NewLine;
+            foreach (ScenarioStep step in scenario.Steps)
+            {
+                result += step.Keyword + step.Text + Environment.NewLine;
+            }
             return result;
         }
 
