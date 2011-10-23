@@ -57,7 +57,6 @@
     <None Include="893e8713-5eac-4990-99cd-c50951452ef6.aml" />
     <None Include="893e8713-5eac-4990-99cd-c50951452ef6.aml" />
     <None Include="893e8713-5eac-4990-99cd-c50951452ef6.aml" />
-    <None Include="1fe4a0e2-cf70-472c-a690-f6811ce87d0f.aml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Lighthouse.jpg">

@@ -6,6 +6,7 @@ Funcionalidade: Adição
 
 20 Esta é uma grande descrição.
 
+GUI:
 <mediaLink>
 <caption placement="after" lead="Figure 1">Caption after with lead-in</caption>
 <image placement="center" xlink:href="Lighthouse"/>

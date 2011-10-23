@@ -62,7 +62,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
             Feature feature = LoadFeature(featureText);
             FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
             Assert.AreEqual(
-                "descrição livre<markup><br /></markup>"
+                "descrição livre"
                 , cut.BuildDescription());
         }
 
@@ -84,13 +84,14 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
 
         [TestCase("GUI:")]
         [TestCase("Notas:")]
+        [TestCase("")]
         public void ShouldBuildRules(string postfixFeatureText)
         {
             string featureText = "Funcionalidade: blabla" + Environment.NewLine +
                 "descrição livre" + Environment.NewLine + Environment.NewLine +
                 "Regras:" + Environment.NewLine +
                 "uma regra" + Environment.NewLine +
-                "duas regras" + Environment.NewLine + Environment.NewLine + 
+                "duas regras" + Environment.NewLine + 
                 postfixFeatureText;
 
             Feature feature = LoadFeature(featureText);
@@ -98,7 +99,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
 
             Assert.AreEqual(
                 "uma regra<markup><br /></markup>" +
-                "duas regras<markup><br /></markup><markup><br /></markup>" 
+                "duas regras" 
                 , cut.BuildRules());
         }
 
@@ -115,6 +116,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
         }
 
         [TestCase("Notas:")]
+        [TestCase("")]
         public void ShouldBuildGUI(string postfixFeatureText)
         {
             string featureText = "Funcionalidade: blabla" + Environment.NewLine +
@@ -127,7 +129,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
             FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
 
             Assert.AreEqual(
-                "uma GUI<markup><br /></markup>"
+                "uma GUI"
                 , cut.BuildGUI());
         }
 

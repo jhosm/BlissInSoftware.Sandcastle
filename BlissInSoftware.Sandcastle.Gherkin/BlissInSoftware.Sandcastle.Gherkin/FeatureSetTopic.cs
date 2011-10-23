@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Xml.Linq;
+using System.Xml;
 
 namespace BlissInSoftware.Sandcastle.Gherkin
 {
     public class FeatureSetTopic : Topic
     {
+        public string CustomTopic { get; set; }
         public string Introduction { get; set; }
 
         IDictionary<Type, string> featureSetDocumentation = new Dictionary<Type, string>();
@@ -31,6 +34,15 @@ namespace BlissInSoftware.Sandcastle.Gherkin
         {
             Builder.ReportProgress("Creating topic content for '{0}'...", Title);
 
+            string customTopicPath = Path.Combine(SourcePath, "Index.aml");
+            if (File.Exists(customTopicPath))
+            {
+                CustomTopic = File.ReadAllText(customTopicPath);
+                XmlDocument root = new XmlDocument();
+                root.LoadXml(CustomTopic);
+                Id = root.DocumentElement.Attributes["id"].Value;
+            }
+
             featureSetDocumentation = new Dictionary<Type, string>();
 
             if (File.Exists(Path.Combine(SourcePath, "Introduction.aml")))
@@ -41,7 +53,6 @@ namespace BlissInSoftware.Sandcastle.Gherkin
             {
                 Introduction = Title;
             }
-
 
             IEnumerable<FeatureSetTopic> featureSetTopics = Children.OfType<FeatureSetTopic>();
             if (featureSetTopics.Count() > 0)
@@ -75,7 +86,6 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                 if (!featureSetDocumentation.ContainsKey(topicType))
                 {
                     featureSetDocumentation.Add(topicType, "<listItem><para>Não existem items.</para></listItem>");
-
                 }
             }
 

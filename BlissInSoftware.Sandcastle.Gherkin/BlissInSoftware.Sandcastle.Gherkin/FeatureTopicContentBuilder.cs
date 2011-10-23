@@ -10,10 +10,10 @@ namespace BlissInSoftware.Sandcastle.Gherkin
     public class FeatureTopicContentBuilder
     {
         private Feature feature;
-        private const string EXTRACT_DESCRIPTION = @"^(.*?)(?=^(?:Regras:|GUI:|Notas:):?)";
-        private const string EXTRACT_RULES = @"^Regras:[\r\n]*\s*(.*?)(?=^(?:GUI:|Notas:):?)";
-        private const string EXTRACT_GUI = @"^GUI:[\r\n]*\s*(.*?)(?=^(?:Notas:):?)";
-        private const string EXTRACT_NOTES = @"^Notas:[\r\n]*\s*(.*)";
+        private const string EXTRACT_DESCRIPTION = @"^(.*?)(?=(?:\r\nRegras:|\r\nGUI:|\r\nNotas:|$))";
+        private const string EXTRACT_RULES = @"(?:^|\n)Regras:[\r\n]*\s*(.*?)(?=(?:\r\nGUI:|\r\nNotas:|$))";
+        private const string EXTRACT_GUI = @"(?:^|\n)GUI:[\r\n]*\s*(.*?)(?=(?:\r\nNotas:|$))";
+        private const string EXTRACT_NOTES = @"(?:^|\n)Notas:[\r\n]*\s*(.*)";
 
         public FeatureTopicContentBuilder(Feature feature)
         {
@@ -80,7 +80,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin
         private string ExtractDescriptionSection(string description, string sectionExtractionRules, string defaultResult)
         {
             string result = defaultResult;
-            Match rulesMatch = Regex.Match(description, sectionExtractionRules, RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline);
+            Match rulesMatch = Regex.Match(description, sectionExtractionRules, RegexOptions.IgnoreCase | RegexOptions.Singleline);
             if (rulesMatch.Groups[1].Captures.Count > 0) result = rulesMatch.Groups[1].Captures[0].Value;
             return ReplaceCrLfWithBrTag(result);
         }
