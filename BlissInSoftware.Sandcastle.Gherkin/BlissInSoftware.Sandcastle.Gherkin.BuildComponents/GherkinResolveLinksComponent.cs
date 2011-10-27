@@ -5,35 +5,26 @@ using System.Text;
 using Microsoft.Ddue.Tools;
 using System.Xml;
 using System.Xml.XPath;
+using System.IO;
 
 namespace BlissInSoftware.Sandcastle.Gherkin.BuildComponents
 {
     public class GherkinResolveLinksComponent: BuildComponent
     {
-        #region Private data members
-        //=======================================================
-        // Private data members
+        private Dictionary<string, string> topicIndex = new Dictionary<string,string>();
 
-        // TODO: Add private data members here
-
-        #endregion
-
-        #region Constructor
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="assembler">A reference to the
-        /// build assembler.</param>
-        /// <param name="configuration">The configuration
-        /// information</param>
-        /// <exception cref="ConfigurationErrorsException">
-        /// This is thrown if an error is detected in the
-        /// configuration.</exception>
-        public GherkinResolveLinksComponent(BuildAssembler assembler, XPathNavigator configuration) : base(assembler, configuration)
+        public GherkinResolveLinksComponent(BuildAssembler assembler, XPathNavigator configuration)
+            : base(assembler, configuration)
         {
-            // TODO: Add code to extract configuration options
+            var fileName = configuration.SelectSingleNode("topicIndex/@location").Value;
+
+            string[] lines = File.ReadAllLines(fileName);
+            foreach (var line in lines)
+            {
+                string[] index = line.Split(',');
+                topicIndex.Add(index[0], index[1]);
+            }
         }
-        #endregion
 
         #region Apply the component
         /// <summary>
@@ -45,8 +36,32 @@ namespace BlissInSoftware.Sandcastle.Gherkin.BuildComponents
         /// item being documented.</param>
         public override void Apply(XmlDocument document, string key)
         {
-            // TODO: Add code to perform the build
-            //       component task(s)
+            var namespaceManager = new XmlNamespaceManager(document.NameTable);
+            namespaceManager.AddNamespace("ghk", XmlNamespaces.GherkinDoc);
+
+            var nodes = document.SelectNodes("//ghk:featureReference", namespaceManager);
+            if (nodes == null)
+                return;
+
+            foreach (XmlNode node in nodes)
+            {
+                var parentNode = node.ParentNode;
+                var userStoryId = node.InnerText;
+
+                if (!topicIndex.ContainsKey(userStoryId))
+                {
+                    BuildAssembler.MessageHandler(GetType(), MessageLevel.Warn, "Could not find user story with ID " + userStoryId);
+                }
+                else
+                {
+                    var topicId = topicIndex[userStoryId];
+                    var linkElement = document.CreateElement("ddue", "link", XmlNamespaces.Maml);
+                    linkElement.SetAttribute("href", XmlNamespaces.XLink, topicId);
+                    linkElement.SetAttribute("topicType_id", "3272D745-2FFC-48C4-9E9D-CF2B2B784D5F");
+                    linkElement.InnerText = "História de Utilizador " + userStoryId;
+                    parentNode.ReplaceChild(linkElement, node);
+                }
+            }
         }
         #endregion
     }

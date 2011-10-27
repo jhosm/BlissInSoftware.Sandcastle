@@ -32,8 +32,6 @@ namespace BlissInSoftware.Sandcastle.Gherkin
 
         public override void Load()
         {
-            Builder.ReportProgress("Creating topic content for '{0}'...", Title);
-
             string customTopicPath = Path.Combine(SourcePath, "Index.aml");
             if (File.Exists(customTopicPath))
             {

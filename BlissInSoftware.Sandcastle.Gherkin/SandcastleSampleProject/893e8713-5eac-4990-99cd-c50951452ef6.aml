@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <topic id="893e8713-5eac-4990-99cd-c50951452ef6" revisionNumber="1">
-  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ghk="http://schemas.blissinsoftware.com/gherkin/2011/1">
     <!--
     <summary>
       <para>Optional summary abstract</para>
@@ -22,6 +22,7 @@
       <content>
         <!-- Uncomment this to create a sub-section outline
         <autoOutline /> -->
+        <ghk:featureReference>123</ghk:featureReference>
         <para><link xlink:href="0ae19179-72ff-5fa2-612b-96e2ff90595c" />Add one or more sections with content</para>
       </content>
       <!-- If a section contains a sections element, its content creates

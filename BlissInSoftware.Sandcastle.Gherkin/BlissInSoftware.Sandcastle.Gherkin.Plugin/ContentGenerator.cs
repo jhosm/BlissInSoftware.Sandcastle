@@ -20,6 +20,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
 
         public string ContentFile { get; private set; }
         public string TopicsFolder { get; private set; }
+        public string TopicIndexPath { get { return Path.Combine(TopicsFolder, "topicIndex.txt"); } }
         public List<string> TopicFiles { get; private set; }
         public Topic RootTopic { get; private set; }
         
@@ -37,7 +38,8 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             BuildTopics();
             GenerateContentFile(RootTopic);
             GenerateTopicFiles();
-         
+            StringBuilder topicIndex = GenerateTopicIndex(new StringBuilder(), new Topic[1] { RootTopic });
+            File.WriteAllText(TopicIndexPath, topicIndex.ToString());
         }
 
         private Topic BuildTopics()
@@ -45,7 +47,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             using (md5 = HashAlgorithm.Create("MD5"))
             {
 
-                RootTopic = Topic.Create(builder, TopicType.FeatureSet, CreateTopicId("Features"), "Features", gherkinFeaturesPath);
+                RootTopic = Topic.Create(TopicType.FeatureSet, CreateTopicId("Features"), "Features", gherkinFeaturesPath);
                 BuildTopicsTree(gherkinFeaturesPath, RootTopic);
             }
             RootTopic.Load();
@@ -57,7 +59,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             foreach (string featureSet in Directory.EnumerateDirectories(parentPath))
             {
                 builder.ReportProgress("Feature set: " + featureSet);
-                Topic currentTopic = Topic.Create(builder, TopicType.FeatureSet, CreateTopicId(featureSet),Path.GetFileName(featureSet), featureSet);
+                Topic currentTopic = Topic.Create(TopicType.FeatureSet, CreateTopicId(featureSet),Path.GetFileName(featureSet), featureSet);
                 parentTopic.Children.Add(currentTopic);
                 BuildTopicsTree(featureSet, currentTopic);
             }
@@ -65,7 +67,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             foreach (string featureFile in Directory.EnumerateFiles(parentPath, "*.feature"))
             {
                 builder.ReportProgress("Feature: " + featureFile);
-                Topic currentTopic = Topic.Create(builder, TopicType.Feature, CreateTopicId(featureFile), Path.GetFileNameWithoutExtension(featureFile), featureFile);
+                Topic currentTopic = Topic.Create(TopicType.Feature, CreateTopicId(featureFile), Path.GetFileNameWithoutExtension(featureFile), featureFile);
                 parentTopic.Children.Add(currentTopic);
             }
         }
@@ -153,6 +155,21 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             TopicFiles.Add(topic.FileName);
 
             builder.ReportProgress("Adding topic file titled '{0}' to '{1}'...", topic.Title, topic.FileName);
+        }
+
+        private StringBuilder GenerateTopicIndex(StringBuilder acc, IEnumerable<Topic> topics)
+        {
+            foreach (var topic in topics)
+            {
+                FeatureTopic featureTopic = topic as FeatureTopic;
+                if (featureTopic != null && !String.IsNullOrEmpty(featureTopic.UserStoryId))
+                {
+                    acc.AppendLine(featureTopic.UserStoryId + "," + featureTopic.Id);
+                }
+
+                acc = GenerateTopicIndex(acc, topic.Children);
+            }
+            return acc;
         }
 
         private string GetAbsoluteFileName(string topicsFolder, Topic topic)

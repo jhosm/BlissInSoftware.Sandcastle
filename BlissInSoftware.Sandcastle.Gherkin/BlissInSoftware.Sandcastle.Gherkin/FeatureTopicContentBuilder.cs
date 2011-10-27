@@ -46,7 +46,6 @@ namespace BlissInSoftware.Sandcastle.Gherkin
 
                 string description = string.Join(Environment.NewLine, descriptionLines);
                 result = ExtractDescriptionSection(description, EXTRACT_DESCRIPTION, "");
-                if (result == "") result = description;
                 result = ReplaceCrLfWithBrTag(result);
             }
             else
@@ -92,7 +91,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin
             if (background != null)
             {
                 result += "Contexto: ";
-                result = BuildSteps(result, background);
+                result = BuildSteps(result, background.Title, background.Steps);
             }
             return result;
         }
@@ -100,7 +99,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin
         public string BuildScenarios()
         {
             string result = "";
-            foreach (var scenario in feature.Scenarios)
+            foreach (Scenario scenario in feature.Scenarios)
             {
                 if (scenario.Tags != null && scenario.Tags.Count > 0)
                 {
@@ -108,17 +107,17 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                 }
 
                 result += "Cenário: ";
-                result = BuildSteps(result, scenario);
+                result = BuildSteps(result, scenario.Title, scenario.Steps);
                 result += Environment.NewLine;
             }
             if (!String.IsNullOrEmpty(result)) result = result.Remove(result.Length - (Environment.NewLine.Length) * 2); 
             return result;
         }
 
-        private static string BuildSteps(string result, dynamic scenario)
+        private static string BuildSteps(string result, string title, ScenarioSteps steps)
         {
-            result += scenario.Title + Environment.NewLine;
-            foreach (ScenarioStep step in scenario.Steps)
+            result += title + Environment.NewLine;
+            foreach (ScenarioStep step in steps)
             {
                 result += step.Keyword + step.Text + Environment.NewLine;
             }

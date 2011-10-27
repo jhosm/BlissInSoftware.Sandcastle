@@ -12,6 +12,8 @@ namespace BlissInSoftware.Sandcastle.Gherkin
 {
     public class FeatureTopic : Topic
     {
+        private const string USER_STORY_ID_TAG_PREFIX = "HU_";
+
         public string Name { get; set; }
         public string Summary { get; set; }
         public string Description { get; set; }
@@ -19,7 +21,17 @@ namespace BlissInSoftware.Sandcastle.Gherkin
         public string Rules { get; set; }
         public string GUI { get; set; }
         public string Notes { get; set; }
+        public string UserStoryId { get; set; }
+        
         private bool contentIsCreated = false;
+        private string unparsedFeature;
+
+        public FeatureTopic() { }
+
+        public FeatureTopic(string unparsedFeature)
+        {
+            this.unparsedFeature = unparsedFeature;
+        }
 
         public override void Load()
 	    {
@@ -28,11 +40,30 @@ namespace BlissInSoftware.Sandcastle.Gherkin
             {
 
 		        SpecFlowLangParser specFlowLangParser = new SpecFlowLangParser(new CultureInfo("pt-PT"));
-		        TextReader textReader = File.OpenText(SourcePath);
-		        using (textReader)
-		        {
-			        feature = specFlowLangParser.Parse(textReader, SourcePath);
-		        }
+                TextReader textReader;
+                if (String.IsNullOrEmpty(unparsedFeature))
+                {
+                    textReader = File.OpenText(SourcePath);
+                }
+                else
+                {
+                    textReader = new StringReader(unparsedFeature);
+                }
+                
+                using (textReader)
+                {
+                    feature = specFlowLangParser.Parse(textReader, SourcePath);
+                }
+
+                if (feature.Tags != null && feature.Tags.Count > 0)
+                {
+                    Tag userStoryIdTag = feature.Tags.Find(aTag => { return aTag.Name.StartsWith(USER_STORY_ID_TAG_PREFIX); });
+                    if (userStoryIdTag != null)
+                    {
+                        UserStoryId = userStoryIdTag.Name.Substring(USER_STORY_ID_TAG_PREFIX.Length);
+                    }
+                }
+
                 FeatureTopicContentBuilder builder = new FeatureTopicContentBuilder(feature);
 
                 Name = builder.BuildName();

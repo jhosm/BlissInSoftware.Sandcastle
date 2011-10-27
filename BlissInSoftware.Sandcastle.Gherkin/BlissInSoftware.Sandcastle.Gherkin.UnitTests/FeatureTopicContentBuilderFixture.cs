@@ -50,6 +50,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
         [TestCase("Regras:")]
         [TestCase("GUI:")]
         [TestCase("Notas:")]
+        [TestCase("")]
         public void ShouldBuildDescriptionWithSubsections(string section)
         {
             string featureText = "Funcionalidade: blabla" + Environment.NewLine +
@@ -59,22 +60,6 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
                 "descrição livre" + Environment.NewLine + Environment.NewLine +
                 section + Environment.NewLine; 
                 
-            Feature feature = LoadFeature(featureText);
-            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
-            Assert.AreEqual(
-                "descrição livre"
-                , cut.BuildDescription());
-        }
-
-        [Test]
-        public void ShouldBuildDescriptionWithoutSubsections()
-        {
-            string featureText = "Funcionalidade: blabla" + Environment.NewLine +
-                "Como Validador" + Environment.NewLine +
-                "Consigo aceder à listagem do FE de Validação, dado possuir acesso a operação GAS adequada," + Environment.NewLine +
-                "De modo a poder consultar todos os processos de um dado conjunto de Processos de Negócio." + Environment.NewLine + Environment.NewLine +
-                "descrição livre" + Environment.NewLine + Environment.NewLine;
-
             Feature feature = LoadFeature(featureText);
             FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
             Assert.AreEqual(
@@ -100,6 +85,26 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
             Assert.AreEqual(
                 "uma regra<markup><br /></markup>" +
                 "duas regras" 
+                , cut.BuildRules());
+        }
+
+        [TestCase("GUI:")]
+        [TestCase("Notas:")]
+        [TestCase("")]
+        public void ShouldBuildRulesWhenThereIsNoDescription(string postfixFeatureText)
+        {
+            string featureText = "Funcionalidade: blabla" + Environment.NewLine +
+                "Regras:" + Environment.NewLine +
+                "uma regra" + Environment.NewLine +
+                "duas regras" + Environment.NewLine +
+                postfixFeatureText;
+
+            Feature feature = LoadFeature(featureText);
+            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
+
+            Assert.AreEqual(
+                "uma regra<markup><br /></markup>" +
+                "duas regras"
                 , cut.BuildRules());
         }
 

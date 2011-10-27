@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
@@ -201,32 +201,33 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             contentGenerator.Generate();
 
             var contentLayoutItem = AddLinkedItem(BuildAction.ContentLayout, contentGenerator.ContentFile);
-  //          contentLayoutItem.SetMetadataValue("SortOrder", Convert.ToString(_configuration.SortOrder, CultureInfo.InvariantCulture));
 
             foreach (var topicFileName in contentGenerator.TopicFiles)
                 AddLinkedItem(BuildAction.None, topicFileName);
 
-           // var componentConfig = GetComponentConfiguration(contentGenerator.IndexFile);
-           // builder.CurrentProject.ComponentConfigurations.Add(GetComponentId(), true, componentConfig);
+            var componentConfig = GetComponentConfiguration(contentGenerator.TopicIndexPath);
+            builder.CurrentProject.ComponentConfigurations.Add(GetComponentId(), true, componentConfig);
 
             builder.CurrentProject.MSBuildProject.ReevaluateIfNecessary();
         }
         #endregion
 
 
-        private static string GetComponentId()
+        private string GetComponentId()
         {
             return @"GherkinFeaturesResolveLinks";
         }
 
-        private static string GetComponentConfiguration(string indexFileName)
+        private string GetComponentConfiguration(string topicIndexPath)
         {
             var id = GetComponentId();
-            const string name = @"XsdDocumentation.BuildComponents.XsdResolveLinksComponent";
-            const string componentDllName = "XsdDocumentation.BuildComponents.dll";
+            const string name = @"BlissInSoftware.Sandcastle.Gherkin.BuildComponents.GherkinResolveLinksComponent";
+            const string componentDllName = "BlissInSoftware.Sandcastle.Gherkin.BuildComponents.dll";
             var plugInDirectoryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var componentPath = Path.Combine(plugInDirectoryPath, componentDllName);
-            var componentConfig = string.Format(@"<component id=""{0}"" type=""{1}"" assembly=""{2}""><indexFile location=""{3}"" /></component>", id, name, componentPath, indexFileName);
+            var componentConfig = string.Format(@"<component id=""{0}"" type=""{1}"" assembly=""{2}""><topicIndex location=""{3}"" /></component>", id, name, componentPath, topicIndexPath);
+            builder.ReportProgress(componentConfig);
+
             return componentConfig;
         }
 
