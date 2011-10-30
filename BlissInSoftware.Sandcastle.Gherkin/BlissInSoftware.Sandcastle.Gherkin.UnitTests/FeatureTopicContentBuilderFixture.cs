@@ -35,15 +35,15 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
             FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
             Assert.AreEqual(
                 "Cenário: Validador tem acesso à listagem" + Environment.NewLine +
-                "Dado um utilizador com a operação GAS \"keyPapiro_Listagem_BO\"" + Environment.NewLine +
-                "Quando acede à listagem do FE de Validação" + Environment.NewLine +
-                "Então tem acesso concedido." + Environment.NewLine +
+                "    Dado um utilizador com a operação GAS \"keyPapiro_Listagem_BO\"" + Environment.NewLine +
+                "    Quando acede à listagem do FE de Validação" + Environment.NewLine +
+                "    Então tem acesso concedido." + Environment.NewLine +
                 "" + Environment.NewLine +
                 "@Automated" + Environment.NewLine +
                 "Cenário: Validador não tem acesso à listagem" + Environment.NewLine +
-                "Dado um utilizador sem a operação GAS \"keyPapiro_Listagem_BO\"" + Environment.NewLine +
-                "Quando acede à listagem do FE de Validação" + Environment.NewLine +
-	            "Então tem acesso negado."
+                "    Dado um utilizador sem a operação GAS \"keyPapiro_Listagem_BO\"" + Environment.NewLine +
+                "    Quando acede à listagem do FE de Validação" + Environment.NewLine +
+	            "    Então tem acesso negado."
                 , cut.BuildScenarios());
         }
 
@@ -154,9 +154,48 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
                 , cut.BuildNotes());
         }
 
+        [Test]
+        public void ShouldBuildStepWithTables()
+        {
+            string featureText = new UTF8Encoding().GetString(Resource1.FeatureWithTablesAndScenarioOutlines);
+            Feature feature = LoadFeature(featureText, new CultureInfo("en-US"));
+            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
+            Assert.AreEqual(
+                "Background: " + Environment.NewLine +
+                "    Given the following books" + Environment.NewLine +
+                "        |Author        |Title                              |Price |" + Environment.NewLine +
+                "        |Martin Fowler |Analysis Patterns                  |50.20 |" + Environment.NewLine +
+                "        |Eric Evans    |Domain Driven Design               |46.34 |" + Environment.NewLine +
+                "        |Ted Pattison  |Inside Windows SharePoint Services |31.49 |" + Environment.NewLine +
+                "        |Gojko Adzic   |Bridging the Communication Gap     |24.75 |" + Environment.NewLine + Environment.NewLine
+                ,cut.BuildBackground());
+        }
+
+        [Test]
+        public void ShouldBuildScenarioOutline()
+        {
+            string featureText = new UTF8Encoding().GetString(Resource1.FeatureWithTablesAndScenarioOutlines);
+            Feature feature = LoadFeature(featureText, new CultureInfo("en-US"));
+            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
+            Assert.AreEqual(
+                "Scenario Outline: Simple search (scenario outline syntax)" + Environment.NewLine + 
+                "    When I perform a simple search on '<search phrase>'" + Environment.NewLine +
+                "    Then the book list should exactly contain books <books>" + Environment.NewLine + Environment.NewLine +
+                "    Examples: By search phrase" + Environment.NewLine +
+                "        |search phrase         |books                                                                  |" + Environment.NewLine +
+                "        |Domain                |'Domain Driven Design'                                                 |" + Environment.NewLine +
+                "        |Windows Communication |'Inside Windows SharePoint Services', 'Bridging the Communication Gap' |" + Environment.NewLine
+                , cut.BuildScenarios());
+        }
+
         private static Feature LoadFeature(string featureText)
         {
-            SpecFlowLangParser specFlowLangParser = new SpecFlowLangParser(new CultureInfo("pt-PT"));
+            return LoadFeature(featureText, new CultureInfo("pt-PT"));
+        }
+
+        private static Feature LoadFeature(string featureText, CultureInfo culture)
+        {
+            SpecFlowLangParser specFlowLangParser = new SpecFlowLangParser(culture);
             TextReader textReader = new StringReader(featureText);
             Feature feature;
             using (textReader)

@@ -40,11 +40,17 @@
 		<keywordlist id="kwgherking-keywords">
 			<kw>Funcionalidade</kw>
 			<kw>Cenário</kw>
+			<kw>Esquema do Cenário</kw>
 			<kw>Dado</kw>
+			<kw>Dados</kw>
+			<kw>Dada</kw>
+			<kw>Dadas</kw>
 			<kw>Quando</kw>
 			<kw>Então</kw>
 			<kw>E</kw>
 			<kw>Mas</kw>
+			<kw>Exemplos</kw>
+			<kw>Contexto</kw>
 		</keywordlist>
 		<!-- Common C-like language keywords (C, C++, C#) -->
 		<keywordlist id="kwclang-keywords">

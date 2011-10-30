@@ -68,6 +68,11 @@
   <ItemGroup>
     <Compile Include="FeatureTopicContentBuilderFixture.cs" />
     <Compile Include="FeatureTopicFixture.cs" />
+    <Compile Include="FeatureWithTablesAndScenarioOutlines.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureWithTablesAndScenarioOutlines.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -78,6 +83,10 @@
   <ItemGroup>
     <None Include="FeatureWithoutDescription.feature">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FeatureWithTablesAndScenarioOutlines.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FeatureWithTablesAndScenarioOutlines.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
