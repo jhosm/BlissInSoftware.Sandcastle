@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<components>
+  <component id="GherkinFeaturesResolveLinks"
+             type="BlissInSoftware.Sandcastle.Gherkin.BuildComponents.GherkinResolveLinksComponent"
+             assembly="{@ComponentsFolder}\BlissInSoftware.Sandcastle.Gherkin.BuildComponents.dll">
+    <description>
+      This build component is used to resolve links to XML topics.
+    </description>
+
+    <insert placement="before" type="Microsoft.Ddue.Tools.TransformComponent" />
+    <insertConceptual placement="before" type="Microsoft.Ddue.Tools.TransformComponent" />
+
+    <hidden />
+    <defaultConfiguration />
+  </component>
+</components>
