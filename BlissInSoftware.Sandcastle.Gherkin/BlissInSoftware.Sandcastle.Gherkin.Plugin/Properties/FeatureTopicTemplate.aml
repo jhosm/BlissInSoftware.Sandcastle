@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <topic id="{0}" revisionNumber="1">
-  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ghk="http://schemas.blissinsoftware.com/gherkin/2011/1">
     <introduction>
       <definitionTable>
         <definedTerm>{1}</definedTerm>
