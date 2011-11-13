@@ -22,6 +22,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.BuildComponents
             foreach (var line in lines)
             {
                 string[] index = line.Split(',');
+                if(topicIndex.ContainsKey(index[0])) throw new Exception("Found more than one feature file with story ID " + index[0]);
                 topicIndex.Add(index[0], index[1]);
             }
         }

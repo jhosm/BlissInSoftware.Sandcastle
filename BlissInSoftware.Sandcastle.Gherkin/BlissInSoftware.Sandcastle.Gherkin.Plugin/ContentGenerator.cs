@@ -172,7 +172,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             return acc;
         }
 
-        private string GetAbsoluteFileName(string topicsFolder, Topic topic)
+        private static string GetAbsoluteFileName(string topicsFolder, Topic topic)
         {
             return Path.Combine(topicsFolder, Path.ChangeExtension(topic.Id, ".aml"));
         }

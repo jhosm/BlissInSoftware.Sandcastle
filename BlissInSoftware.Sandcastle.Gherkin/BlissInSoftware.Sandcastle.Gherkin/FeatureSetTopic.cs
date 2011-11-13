@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Xml.Linq;
 using System.Xml;
+using TechTalk.SpecFlow.Parser;
 
 namespace BlissInSoftware.Sandcastle.Gherkin
 {
@@ -58,7 +59,16 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                 string featureSetTopicsContent = "";
                 foreach (var topic in featureSetTopics)
                 {
-                    topic.Load();
+                    try
+                    {
+                        topic.Load();
+                    }
+                    catch (SpecFlowParserException ex)
+                    {
+                        Exception newEx = new Exception(topic.SourcePath + ": " + ex.Message, ex);
+                        throw newEx;
+                    }
+                    
                     featureSetTopicsContent += String.Format("<listItem><para>{0}</para></listItem>", topic.Title);
                 }
                 featureSetDocumentation.Add(typeof(FeatureSetTopic), featureSetTopicsContent);
@@ -70,7 +80,15 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                 string featureTopicContents = "<definitionTable>";
                 foreach (var topic in featureTopics)
                 {
-                    topic.Load();
+                    try
+                    {
+                        topic.Load();
+                    }
+                    catch (SpecFlowParserException ex)
+                    {
+                        Exception newEx = new Exception(topic.SourcePath + ": " + ex.Message, ex);
+                        throw newEx;
+                    }
                     featureTopicContents += "<definedTerm>" + topic.Name + "</definedTerm>";
                     featureTopicContents += "<definition>" + topic.Summary + "</definition>";
                 }

@@ -23,11 +23,6 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             get { return txtFeaturesPath.Text; }
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void showFolderBrowser_Click(object sender, EventArgs e)
         {
             if(folderBrowserDialog.ShowDialog() == DialogResult.OK)

@@ -11,6 +11,7 @@ using SandcastleBuilder.Utils.PlugIn;
 using System.IO;
 using Microsoft.Build.Evaluation;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
 {
@@ -200,7 +201,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             var contentGenerator = new ContentGenerator(builder, gherkinFeaturesPath);
             contentGenerator.Generate();
 
-            var contentLayoutItem = AddLinkedItem(BuildAction.ContentLayout, contentGenerator.ContentFile);
+            AddLinkedItem(BuildAction.ContentLayout, contentGenerator.ContentFile);
 
             foreach (var topicFileName in contentGenerator.TopicFiles)
                 AddLinkedItem(BuildAction.None, topicFileName);
@@ -213,7 +214,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
         #endregion
 
 
-        private string GetComponentId()
+        private static string GetComponentId()
         {
             return @"GherkinFeaturesResolveLinks";
         }
@@ -225,7 +226,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             const string componentDllName = "BlissInSoftware.Sandcastle.Gherkin.BuildComponents.dll";
             var plugInDirectoryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var componentPath = Path.Combine(plugInDirectoryPath, componentDllName);
-            var componentConfig = string.Format(@"<component id=""{0}"" type=""{1}"" assembly=""{2}""><topicIndex location=""{3}"" /></component>", id, name, componentPath, topicIndexPath);
+            var componentConfig = string.Format(CultureInfo.CurrentCulture, @"<component id=""{0}"" type=""{1}"" assembly=""{2}""><topicIndex location=""{3}"" /></component>", id, name, componentPath, topicIndexPath);
             builder.ReportProgress(componentConfig);
 
             return componentConfig;
