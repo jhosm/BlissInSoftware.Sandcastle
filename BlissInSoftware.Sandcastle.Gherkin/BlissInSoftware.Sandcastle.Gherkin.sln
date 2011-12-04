@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlissInSoftware.Sandcastle.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlissInSoftware.Sandcastle.Gherkin", "BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.csproj", "{3784EAB6-5840-4996-AB43-C01B644DEFA3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D4F8204A-F0BA-4D53-8A2B-4F3BF23B207B}"
+	ProjectSection(SolutionItems) = preProject
+		resources\FeatureSetTopicTemplate.aml = resources\FeatureSetTopicTemplate.aml
+		resources\FeatureTopicTemplate.aml = resources\FeatureTopicTemplate.aml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

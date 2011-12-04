@@ -25,8 +25,10 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
         private BuildProcess builder;
 
         private const string xpathGherkinFeaturesPath = "/configuration/gherkinFeatures/path";
+        private const string xpathGherkinFeaturesLanguage = "/configuration/gherkinFeatures/language";
 
         private string gherkinFeaturesPath;
+        private string gherkinFeaturesLanguage;
         #endregion
 
         #region IPlugIn implementation
@@ -133,35 +135,37 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             XmlDocument configXml = new XmlDocument();
             configXml.LoadXml(currentConfig);
 
-            XmlElement elm = configXml.SelectSingleNode(xpathGherkinFeaturesPath) as XmlElement;
-            if (elm != null)
-            {
-                gherkinFeaturesPath = elm.InnerText;
-            }
+            XmlElement featuresPathXmlElement = configXml.SelectSingleNode(xpathGherkinFeaturesPath) as XmlElement;
+            if (featuresPathXmlElement != null) gherkinFeaturesPath = featuresPathXmlElement.InnerText;
+            XmlElement featuresLanguageXmlElement = configXml.SelectSingleNode(xpathGherkinFeaturesLanguage) as XmlElement;
+            if (featuresLanguageXmlElement != null) gherkinFeaturesLanguage = featuresLanguageXmlElement.InnerText;
 
-            using (GherkinFeaturesConfigDlg dlg = new GherkinFeaturesConfigDlg(gherkinFeaturesPath))
+            using (GherkinFeaturesConfigDlg dlg = new GherkinFeaturesConfigDlg(gherkinFeaturesPath, gherkinFeaturesLanguage))
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    gherkinFeaturesPath = dlg.GherkinFeaturesPath;
-                    if (elm != null)
-                    {
-                        elm.InnerText = gherkinFeaturesPath;
-                    }
-                    else
-                    {
-                        XmlElement gherkinNode = configXml.CreateElement("gherkinFeatures");
-                        configXml.DocumentElement.AppendChild(gherkinNode);
-
-                        XmlElement pathNode = configXml.CreateElement("path");
-                        gherkinNode.AppendChild(pathNode);
-                        pathNode.InnerText = gherkinFeaturesPath;
-                    }
-
-                    
+                    SaveConfigElement(configXml, featuresPathXmlElement, dlg.GherkinFeaturesPath, "path");
+                    SaveConfigElement(configXml, featuresLanguageXmlElement, dlg.GherkinFeaturesLanguage, "language");
                 }
             }
             return configXml.OuterXml;
+        }
+
+        private static void SaveConfigElement(XmlDocument configXml, XmlElement elm, string gherkinConfigElement, string elementName)
+        {
+            if (elm != null)
+            {
+                elm.InnerText = gherkinConfigElement;
+            }
+            else
+            {
+                XmlElement gherkinNode = configXml.CreateElement("gherkinFeatures");
+                configXml.DocumentElement.AppendChild(gherkinNode);
+
+                XmlElement node = configXml.CreateElement(elementName);
+                gherkinNode.AppendChild(node);
+                node.InnerText = gherkinConfigElement;
+            }
         }
 
         /// <summary>
@@ -188,6 +192,15 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             gherkinFeaturesPath = gherkinFeaturesConfiguredPath.InnerXml;
 
             if (!Directory.Exists(gherkinFeaturesPath)) throw new InvalidOperationException("Could not find the configured path to the features to document. Please, check the " + Name + " plugin configuration.");
+
+            XPathNavigator gherkinFeaturesConfiguredLanguage = configuration.SelectSingleNode(xpathGherkinFeaturesLanguage);
+            if (gherkinFeaturesConfiguredLanguage == null)
+            {
+                builder.ReportProgress("Could not find on the configuration the language of the features to document. Using " + CultureInfo.CurrentCulture.Name + ".");
+                gherkinFeaturesLanguage = CultureInfo.CurrentCulture.Name;
+            }
+            else gherkinFeaturesLanguage = gherkinFeaturesConfiguredLanguage.InnerXml;
+
         }
 
         /// <summary>
@@ -198,7 +211,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
         {
             builder.ReportProgress("Creating Features documentation...");
 
-            var contentGenerator = new ContentGenerator(builder, gherkinFeaturesPath);
+            var contentGenerator = new ContentGenerator(builder, gherkinFeaturesPath, new CultureInfo(gherkinFeaturesLanguage));
             contentGenerator.Generate();
 
             AddLinkedItem(BuildAction.ContentLayout, contentGenerator.ContentFile);

@@ -27,3 +27,16 @@ Cenário: Adicionar dois números1
     E que eu digitei 70 na calculadora
     Quando eu aperto o botão de soma
     Então o resultado na calculadora deve ser 120	
+	
+Cenário: Um teste
+    Dado que eu digitei 50 na calculadora
+    E que eu digitei 70 na calculadora
+    Quando eu aperto o botão de soma
+    Então o écran deve-me apresentar
+		"""
+		50
+		+
+		70
+		=
+		120
+		"""

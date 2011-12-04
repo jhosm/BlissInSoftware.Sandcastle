@@ -59,15 +59,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                 string featureSetTopicsContent = "";
                 foreach (var topic in featureSetTopics)
                 {
-                    try
-                    {
-                        topic.Load();
-                    }
-                    catch (SpecFlowParserException ex)
-                    {
-                        Exception newEx = new Exception(topic.SourcePath + ": " + ex.Message, ex);
-                        throw newEx;
-                    }
+                    LoadChildTopic(topic);
                     
                     featureSetTopicsContent += String.Format("<listItem><para>{0}</para></listItem>", topic.Title);
                 }
@@ -80,15 +72,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                 string featureTopicContents = "<definitionTable>";
                 foreach (var topic in featureTopics)
                 {
-                    try
-                    {
-                        topic.Load();
-                    }
-                    catch (SpecFlowParserException ex)
-                    {
-                        Exception newEx = new Exception(topic.SourcePath + ": " + ex.Message, ex);
-                        throw newEx;
-                    }
+                    LoadChildTopic(topic);
                     featureTopicContents += "<definedTerm>" + topic.Name + "</definedTerm>";
                     featureTopicContents += "<definition>" + topic.Summary + "</definition>";
                 }
@@ -106,6 +90,19 @@ namespace BlissInSoftware.Sandcastle.Gherkin
             }
 
 
+        }
+
+        private static void LoadChildTopic(Topic topic)
+        {
+            try
+            {
+                topic.Load();
+            }
+            catch (SpecFlowParserException ex)
+            {
+                Exception newEx = new Exception(topic.SourcePath + ": " + ex.Message, ex);
+                throw newEx;
+            }
         }
     }
 }

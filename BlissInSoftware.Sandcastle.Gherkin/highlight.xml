@@ -956,6 +956,8 @@
 			<contexts default="code">
 				<!-- basic source code context -->
 				<context id="code" attribute="code">
+					<!-- """ multiline text argument """ -->
+					<detect2chars attribute="literal" context="blockcomment" char='"' char1='"' />
 					<!-- " " literals -->
 					<regexp id="dqliteral" attribute="literal" context="code" expression="(&quot;&quot;)|(&quot;(.|\\&quot;|\\\r\n)*?((\\\\)+&quot;|[^\\]{1}&quot;))" />
 					<!-- ' ' literals -->
@@ -964,6 +966,11 @@
 					<regexp id="number" attribute="number" context="code" expression="0x[0-9a-fA-F]*|(((?&lt;=[^0-9])(\+|-))?)\b[0-9][0-9]*(\.[0-9]+)?" />
 					<!-- keyword C-like -->
 					<keyword attribute="keyword" context="code" family="kwgherking-keywords" />
+				</context>
+				<!-- """ multiline text argument """ -->
+				<context id="blockcomment" attribute="literal">
+					<!-- finish line of comment, start block -->
+					<detect2chars attribute="literal" context="code" char='"' char1='"' />
 				</context>
 			</contexts>
 		</language>

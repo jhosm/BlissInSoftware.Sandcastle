@@ -60,6 +60,13 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests {
             }
         }
         
+        internal static byte[] FeatureWithMultilineTextArgument {
+            get {
+                object obj = ResourceManager.GetObject("FeatureWithMultilineTextArgument", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         internal static byte[] FeatureWithoutDescription {
             get {
                 object obj = ResourceManager.GetObject("FeatureWithoutDescription", resourceCulture);

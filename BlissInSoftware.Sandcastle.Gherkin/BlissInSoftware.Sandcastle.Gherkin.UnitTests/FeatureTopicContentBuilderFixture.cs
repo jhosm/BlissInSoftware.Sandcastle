@@ -19,7 +19,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
         {
             string featureText = new UTF8Encoding().GetString(Resource1.FeatureWithoutDescription);
             Feature feature = LoadFeature(featureText);
-            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
+            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature, new CultureInfo("pt-PT"));
             Assert.AreEqual(
                 "Como Validador<markup><br /></markup>" +
                 "Consigo aceder à listagem do FE de Validação, dado possuir acesso a operação GAS adequada,<markup><br /></markup>" +
@@ -32,7 +32,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
         {
             string featureText = new UTF8Encoding().GetString(Resource1.FeatureWithoutDescription);
             Feature feature = LoadFeature(featureText);
-            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
+            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature, new CultureInfo("pt-PT"));
             Assert.AreEqual(
                 "Cenário: Validador tem acesso à listagem" + Environment.NewLine +
                 "    Dado um utilizador com a operação GAS \"keyPapiro_Listagem_BO\"" + Environment.NewLine +
@@ -61,7 +61,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
                 section + Environment.NewLine; 
                 
             Feature feature = LoadFeature(featureText);
-            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
+            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature, new CultureInfo("pt-PT"));
             Assert.AreEqual(
                 "descrição livre"
                 , cut.BuildDescription());
@@ -80,7 +80,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
                 postfixFeatureText;
 
             Feature feature = LoadFeature(featureText);
-            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
+            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature, new CultureInfo("pt-PT"));
 
             Assert.AreEqual(
                 "uma regra<markup><br /></markup>" +
@@ -100,7 +100,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
                 postfixFeatureText;
 
             Feature feature = LoadFeature(featureText);
-            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
+            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature, new CultureInfo("pt-PT"));
 
             Assert.AreEqual(
                 "uma regra<markup><br /></markup>" +
@@ -115,9 +115,9 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
                 "descrição livre" + Environment.NewLine + Environment.NewLine;
 
             Feature feature = LoadFeature(featureText);
-            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
+            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature, new CultureInfo("pt-PT"));
 
-            Assert.AreEqual("Não aplicável no contexto desta história.", cut.BuildRules());
+            Assert.AreEqual("Não aplicável.", cut.BuildRules());
         }
 
         [TestCase("Notas:")]
@@ -131,7 +131,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
                 postfixFeatureText;
 
             Feature feature = LoadFeature(featureText);
-            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
+            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature, new CultureInfo("pt-PT"));
 
             Assert.AreEqual(
                 "uma GUI"
@@ -147,7 +147,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
                 "uma nota";
 
             Feature feature = LoadFeature(featureText);
-            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
+            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature, new CultureInfo("pt-PT"));
 
             Assert.AreEqual(
                 "uma nota"
@@ -159,7 +159,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
         {
             string featureText = new UTF8Encoding().GetString(Resource1.FeatureWithTablesAndScenarioOutlines);
             Feature feature = LoadFeature(featureText, new CultureInfo("en-US"));
-            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
+            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature, new CultureInfo("en-US"));
             Assert.AreEqual(
                 "Background: " + Environment.NewLine +
                 "    Given the following books" + Environment.NewLine +
@@ -172,11 +172,28 @@ namespace BlissInSoftware.Sandcastle.Gherkin.UnitTests
         }
 
         [Test]
+        public void ShouldBuildStepWithMultilineTextArgument()
+        {
+            string featureText = new UTF8Encoding().GetString(Resource1.FeatureWithMultilineTextArgument);
+            Feature feature = LoadFeature(featureText, new CultureInfo("en-US"));
+            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature, new CultureInfo("en-US"));
+            Assert.AreEqual(
+                "Scenario: Book's dedication" + Environment.NewLine +
+                "    When I open the dedication page for \"Domain Driven Design\"" + Environment.NewLine +
+                "    Then I read" + Environment.NewLine +
+                "        \"\"\"" + Environment.NewLine +
+                "        To Mom" + Environment.NewLine +
+                "        And Dad" + Environment.NewLine +
+                "        \"\"\""
+                ,cut.BuildScenarios());
+        }
+
+        [Test]
         public void ShouldBuildScenarioOutline()
         {
             string featureText = new UTF8Encoding().GetString(Resource1.FeatureWithTablesAndScenarioOutlines);
             Feature feature = LoadFeature(featureText, new CultureInfo("en-US"));
-            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature);
+            FeatureTopicContentBuilder cut = new FeatureTopicContentBuilder(feature, new CultureInfo("pt-PT"));
             Assert.AreEqual(
                 "Scenario Outline: Simple search (scenario outline syntax)" + Environment.NewLine + 
                 "    When I perform a simple search on '<search phrase>'" + Environment.NewLine +

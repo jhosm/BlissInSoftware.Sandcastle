@@ -39,7 +39,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin
             if (!contentIsCreated)
             {
 
-		        SpecFlowLangParser specFlowLangParser = new SpecFlowLangParser(new CultureInfo("pt-PT"));
+		        SpecFlowLangParser specFlowLangParser = new SpecFlowLangParser(Language);
                 TextReader textReader;
                 if (String.IsNullOrEmpty(unparsedFeature))
                 {
@@ -64,7 +64,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                     }
                 }
 
-                FeatureTopicContentBuilder builder = new FeatureTopicContentBuilder(feature);
+                FeatureTopicContentBuilder builder = new FeatureTopicContentBuilder(feature, Language);
 
                 Name = builder.BuildName();
                 Summary = builder.BuildSummary();

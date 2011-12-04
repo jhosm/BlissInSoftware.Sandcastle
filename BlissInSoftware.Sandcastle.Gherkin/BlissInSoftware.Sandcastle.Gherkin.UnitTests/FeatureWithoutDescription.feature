@@ -1,4 +1,4 @@
-﻿@US335
+﻿@HU_335
 Funcionalidade: Controlar acesso à listagem do FE de Validação com operação GAS própria
 	Como Validador
 	Consigo aceder à listagem do FE de Validação, dado possuir acesso a operação GAS adequada,

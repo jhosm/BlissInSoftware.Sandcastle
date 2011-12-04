@@ -5,9 +5,9 @@ using System.Text;
 using SandcastleBuilder.Utils.BuildEngine;
 using System.IO;
 using System.Xml;
-using BlissInSoftware.Sandcastle.Gherkin.Plugin.Properties;
 using System.Security.Cryptography;
 using BlissInSoftware.Sandcastle.Gherkin;
+using System.Globalization;
 
 namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
 {
@@ -15,6 +15,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
     {
         private BuildProcess builder;
         private string gherkinFeaturesPath;
+        private CultureInfo gherkinFeaturesLanguage;
         private HashSet<Guid> guidsInUse;
         private HashAlgorithm md5;
 
@@ -24,10 +25,11 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
         public List<string> TopicFiles { get; private set; }
         public Topic RootTopic { get; private set; }
         
-        public ContentGenerator(BuildProcess builder, string gherkinFeaturesPath)
+        public ContentGenerator(BuildProcess builder, string gherkinFeaturesPath, CultureInfo gherkinFeaturesLanguage)
         {
             this.builder = builder;
             this.gherkinFeaturesPath = gherkinFeaturesPath;
+            this.gherkinFeaturesLanguage = gherkinFeaturesLanguage;
             this.guidsInUse = new HashSet<Guid>();
         }
 
@@ -47,7 +49,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             using (md5 = HashAlgorithm.Create("MD5"))
             {
 
-                RootTopic = Topic.Create(TopicType.FeatureSet, CreateTopicId("Features"), "Features", gherkinFeaturesPath);
+                RootTopic = Topic.Create(TopicType.FeatureSet, CreateTopicId("Features"), "Features", gherkinFeaturesPath, gherkinFeaturesLanguage);
                 BuildTopicsTree(gherkinFeaturesPath, RootTopic);
             }
             RootTopic.Load();
@@ -59,7 +61,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             foreach (string featureSet in Directory.EnumerateDirectories(parentPath))
             {
                 builder.ReportProgress("Feature set: " + featureSet);
-                Topic currentTopic = Topic.Create(TopicType.FeatureSet, CreateTopicId(featureSet),Path.GetFileName(featureSet), featureSet);
+                Topic currentTopic = Topic.Create(TopicType.FeatureSet, CreateTopicId(featureSet),Path.GetFileName(featureSet), featureSet, gherkinFeaturesLanguage);
                 parentTopic.Children.Add(currentTopic);
                 BuildTopicsTree(featureSet, currentTopic);
             }
@@ -67,7 +69,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             foreach (string featureFile in Directory.EnumerateFiles(parentPath, "*.feature"))
             {
                 builder.ReportProgress("Feature: " + featureFile);
-                Topic currentTopic = Topic.Create(TopicType.Feature, CreateTopicId(featureFile), Path.GetFileNameWithoutExtension(featureFile), featureFile);
+                Topic currentTopic = Topic.Create(TopicType.Feature, CreateTopicId(featureFile), Path.GetFileNameWithoutExtension(featureFile), featureFile, gherkinFeaturesLanguage);
                 parentTopic.Children.Add(currentTopic);
             }
         }

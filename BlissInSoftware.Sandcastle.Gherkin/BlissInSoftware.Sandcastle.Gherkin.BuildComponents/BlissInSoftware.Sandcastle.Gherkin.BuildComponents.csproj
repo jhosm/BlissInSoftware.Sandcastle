@@ -39,7 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BuildAssemblerLibrary">
-      <HintPath>..\lib\Sandcastle\BuildAssemblerLibrary.dll</HintPath>
+      <HintPath>..\..\lib\Sandcastle\BuildAssemblerLibrary.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
