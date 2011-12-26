@@ -964,6 +964,7 @@
 					<regexp id="sqliteral" attribute="literal" context="code" expression="(&apos;&apos;)|(&apos;(.|\\&apos;|\\\r\n)*?((\\\\)+&apos;|[^\\]{1}&apos;))" />
 					<!-- numbers -->
 					<regexp id="number" attribute="number" context="code" expression="0x[0-9a-fA-F]*|(((?&lt;=[^0-9])(\+|-))?)\b[0-9][0-9]*(\.[0-9]+)?" />
+					<regexp id="tag" attribute="literal" context="code" expression="@[^\r,]+" />
 					<!-- keyword C-like -->
 					<keyword attribute="keyword" context="code" family="kwgherking-keywords" />
 				</context>

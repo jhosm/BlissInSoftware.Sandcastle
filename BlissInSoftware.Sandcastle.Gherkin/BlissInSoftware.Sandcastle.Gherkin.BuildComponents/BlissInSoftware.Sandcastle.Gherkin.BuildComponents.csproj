@@ -39,8 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BuildAssemblerLibrary">
-      <HintPath>..\..\lib\Sandcastle\BuildAssemblerLibrary.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\lib\Sandcastle\BuildAssemblerLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

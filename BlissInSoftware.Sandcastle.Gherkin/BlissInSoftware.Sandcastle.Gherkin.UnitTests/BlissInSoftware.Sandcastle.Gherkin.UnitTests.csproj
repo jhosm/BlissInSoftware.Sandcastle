@@ -68,16 +68,6 @@
   <ItemGroup>
     <Compile Include="FeatureTopicContentBuilderFixture.cs" />
     <Compile Include="FeatureTopicFixture.cs" />
-    <Compile Include="FeatureWithMultilineTextArgument.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FeatureWithMultilineTextArgument.feature</DependentUpon>
-    </Compile>
-    <Compile Include="FeatureWithTablesAndScenarioOutlines.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FeatureWithTablesAndScenarioOutlines.feature</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
