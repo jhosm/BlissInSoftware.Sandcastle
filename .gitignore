@@ -16,3 +16,8 @@
 /BlissInSoftware.Sandcastle.Gherkin/BlissInSoftware.Sandcastle.Gherkin.BuildComponents/bin
 /BlissInSoftware.Sandcastle.Gherkin/obj
 /blissinsoftware.sandcastle.gherkin/SandcastleSampleProject/Help
+/BlissInSoftware.Sandcastle.Gherkin/BlissInSoftware.Sandcastle.Gherkin/.sonar
+/BlissInSoftware.Sandcastle.Gherkin/BlissInSoftware.Sandcastle.Gherkin.BuildComponents/.sonar
+/BlissInSoftware.Sandcastle.Gherkin/BlissInSoftware.Sandcastle.Gherkin.Plugin/.sonar
+/BlissInSoftware.Sandcastle.Gherkin/BlissInSoftware.Sandcastle.Gherkin.Plugin/_ReSharper.BlissInSoftware.Sandcastle.Gherkin.Plugin
+/BlissInSoftware.Sandcastle.Gherkin/BlissInSoftware.Sandcastle.Gherkin.UnitTests/.sonar
