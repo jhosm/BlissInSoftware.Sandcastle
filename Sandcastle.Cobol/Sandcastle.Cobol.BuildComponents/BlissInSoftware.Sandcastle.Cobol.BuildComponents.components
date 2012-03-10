@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<components>
+  <component id="CobolResolveLinks"
+             type="BlissInSoftware.Sandcastle.Cobol.BuildComponents.ResolveLinksComponent"
+             assembly="{@ComponentsFolder}\BlissInSoftware.Sandcastle.Cobol.BuildComponents.dll">
+    <description>
+      This build component is used to resolve links to Cobol topics.
+    </description>
+
+    <insert placement="before" type="Microsoft.Ddue.Tools.TransformComponent" />
+    <insertConceptual placement="before" type="Microsoft.Ddue.Tools.TransformComponent" />
+
+    <hidden />
+    <defaultConfiguration />
+  </component>
+</components>
