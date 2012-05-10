@@ -52,7 +52,14 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                 
                 using (textReader)
                 {
-                    feature = specFlowLangParser.Parse(textReader, SourcePath);
+                    try
+                    {
+                        feature = specFlowLangParser.Parse(textReader, SourcePath);
+                    }
+                    catch (SpecFlowParserException ex)
+                    {
+                        throw new Exception(SourcePath + "\r\n" + ex.Message, ex);
+                    }
                 }
 
                 if (feature.Tags != null && feature.Tags.Count > 0)

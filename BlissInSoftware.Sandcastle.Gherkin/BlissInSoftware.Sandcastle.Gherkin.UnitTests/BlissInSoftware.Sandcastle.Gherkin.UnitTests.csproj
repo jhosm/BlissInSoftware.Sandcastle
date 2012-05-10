@@ -59,10 +59,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="TechTalk.SpecFlow">
-      <HintPath>..\lib\SpecFlow\TechTalk.SpecFlow.dll</HintPath>
+      <HintPath>..\..\lib\SpecFlow\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
     <Reference Include="TechTalk.SpecFlow.Parser">
-      <HintPath>..\lib\SpecFlow\TechTalk.SpecFlow.Parser.dll</HintPath>
+      <HintPath>..\..\lib\SpecFlow\TechTalk.SpecFlow.Parser.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

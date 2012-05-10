@@ -121,9 +121,6 @@
   <data name="FeatureSetTopicTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>FeatureSetTopicTemplate.aml;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="FeatureTopicContent_NASection" xml:space="preserve">
-    <value>Não aplicável.</value>
-  </data>
   <data name="FeatureTopicContent_SubSectionNames" xml:space="preserve">
     <value>Notas:;GUI:;Regras:</value>
   </data>

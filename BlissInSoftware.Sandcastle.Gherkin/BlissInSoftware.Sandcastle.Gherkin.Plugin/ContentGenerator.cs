@@ -40,8 +40,10 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             BuildTopics();
             GenerateContentFile(RootTopic);
             GenerateTopicFiles();
-            StringBuilder topicIndex = GenerateTopicIndex(new StringBuilder(), new Topic[1] { RootTopic });
-            File.WriteAllText(TopicIndexPath, topicIndex.ToString());
+            Dictionary<string, FeatureTopic> topicIndex = GenerateTopicIndex(new Dictionary<string, FeatureTopic>(), new Topic[1] { RootTopic });
+            string topicIndexContents = topicIndex.Aggregate("", (acc, next) =>
+                                                  acc + next.Key + "," + next.Value.Id + "\r\n");
+            File.WriteAllText(TopicIndexPath, topicIndexContents.Substring(0, topicIndexContents.Length - 2));
         }
 
         private Topic BuildTopics()
@@ -49,7 +51,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             using (md5 = HashAlgorithm.Create("MD5"))
             {
 
-                RootTopic = Topic.Create(TopicType.FeatureSet, CreateTopicId("Features"), "Features", gherkinFeaturesPath, gherkinFeaturesLanguage);
+                RootTopic = Topic.Create(TopicType.FeatureSet, CreateTopicId("Documentação Funcional"), "Documentação Funcional", gherkinFeaturesPath, gherkinFeaturesLanguage);
                 BuildTopicsTree(gherkinFeaturesPath, RootTopic);
             }
             RootTopic.Load();
@@ -129,19 +131,83 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
         {
             Directory.CreateDirectory(TopicsFolder);
             TopicFiles = new List<string>();
-            GenerateTopicFiles( new Topic[1] {RootTopic} );
+            GenerateTopicFiles( new Topic[1] {RootTopic}, null, null);
         }
 
-        private void GenerateTopicFiles(IEnumerable<Topic> topics)
+        private void GenerateTopicFiles(IList<Topic> topics, Topic parent, Topic parentsNextSibling)
         {
-            foreach (var topic in topics)
+
+            for (int i = 0; i < topics.Count; i++)
             {
+                Topic topic = topics[i];
+                topic.Children.Sort((x, y) => { return String.Compare(x.Title, y.Title); });
+                Topic nextTopic;
+                Topic previousTopic;
+                DeterminePreviousAndNextTopic(topics, parent, parentsNextSibling, i, topic, out nextTopic, out previousTopic);
+
                 AddTopicFile(topic);
                 FeatureContentCreator creator = new FeatureContentCreator();
-                string topicContents = creator.Visit((dynamic)topic); 
+                string topicContents = creator.Visit((dynamic)topic, nextTopic, previousTopic);
                 WriteTopicFile(topic, topicContents);
 
-                GenerateTopicFiles(topic.Children);
+                var topicsNextSibling = i + 1 < topics.Count ? parent.Children[i + 1] : null;
+                GenerateTopicFiles(topic.Children, topic, topicsNextSibling);
+                
+            }
+        }
+
+        private static void DeterminePreviousAndNextTopic(IList<Topic> topics, Topic parent, Topic parentsNextSibling, int topicsSiblingPosition, Topic topic, out Topic nextTopic, out Topic previousTopic)
+        {
+            var topicIsFirstSibling = topicsSiblingPosition == 0;
+            var topicIsLastSibling = topicsSiblingPosition == topics.Count - 1;
+            if (topicIsFirstSibling)
+            {
+                previousTopic = parent;
+                if (topic.Children.Count > 0)
+                {
+                    nextTopic = topic.Children[0];
+                }
+                else if (topicIsLastSibling)
+                {
+                    nextTopic = parentsNextSibling;
+                }
+                else
+                {
+                    nextTopic = topics[topicsSiblingPosition + 1];
+                }
+            }
+            else if (topicIsLastSibling)
+            {
+                if (topic.Children.Count > 0)
+                {
+                    nextTopic = topic.Children[0];
+                }
+                else
+                {
+                    nextTopic = parentsNextSibling;
+                }
+                previousTopic = topics[topicsSiblingPosition - 1];
+            }
+            else
+            {
+                if (topic.Children.Count > 0)
+                {
+                    nextTopic = topic.Children[0];
+                }
+                else
+                {
+                    nextTopic = topics[topicsSiblingPosition + 1];
+                }
+
+                var previousSibling = topics[topicsSiblingPosition - 1];
+                if (previousSibling.Children.Count > 0)
+                {
+                    previousTopic = previousSibling.Children[previousSibling.Children.Count - 1];
+                }
+                else
+                {
+                    previousTopic = topics[topicsSiblingPosition - 1];
+                }
             }
         }
 
@@ -159,14 +225,17 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             builder.ReportProgress("Adding topic file titled '{0}' to '{1}'...", topic.Title, topic.FileName);
         }
 
-        private StringBuilder GenerateTopicIndex(StringBuilder acc, IEnumerable<Topic> topics)
+        private Dictionary<string, FeatureTopic> GenerateTopicIndex(Dictionary<string, FeatureTopic> acc, IEnumerable<Topic> topics)
         {
             foreach (var topic in topics)
             {
                 FeatureTopic featureTopic = topic as FeatureTopic;
                 if (featureTopic != null && !String.IsNullOrEmpty(featureTopic.UserStoryId))
                 {
-                    acc.AppendLine(featureTopic.UserStoryId + "," + featureTopic.Id);
+                    if(acc.ContainsKey(featureTopic.UserStoryId)) {
+                        throw new Exception(string.Format("Encontradas duas histórias com a mesma tag: @HU_{0}. As Histórias são {1} e {2}.", featureTopic.UserStoryId, featureTopic.SourcePath, acc[featureTopic.UserStoryId].SourcePath));
+                    }
+                    acc.Add(featureTopic.UserStoryId, featureTopic);
                 }
 
                 acc = GenerateTopicIndex(acc, topic.Children);

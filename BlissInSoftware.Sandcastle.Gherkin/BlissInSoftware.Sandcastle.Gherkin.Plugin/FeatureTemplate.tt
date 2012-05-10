@@ -1,46 +1,53 @@
+﻿<#@ template language="C#" #>
 <?xml version="1.0" encoding="utf-8"?>
-<topic id="{0}" revisionNumber="1">
+<topic id="<#=feature.Id#>" revisionNumber="1">
   <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ghk="http://schemas.blissinsoftware.com/gherkin/2011/1">
     <introduction>
       <definitionTable>
-        <definedTerm>{1}</definedTerm>
-        <definition>{2}</definition>
+        <definedTerm><#=feature.Name#></definedTerm>
+        <definition><#=feature.Summary#></definition>
       </definitionTable>
     </introduction>
     <section address="Description">
       <title>Descrição da funcionalidade pretendida na aplicação</title>
       <content>
-        <para>{3}</para>
+        <para><#=feature.Description#></para>
       </content>
       <sections>
+	  <#if (!String.IsNullOrEmpty(feature.Rules)){#>
         <section address="SubSection1">
           <title>Regras e Validações</title>
           <content>
-            <para>{4}</para>
+            <para><#=feature.Rules#></para>
           </content>
         </section>
+	  <#}#>
+	  <#if (!String.IsNullOrEmpty(feature.GUI)){#>
         <section address="SubSection2">
           <title>Ecrãs/Impressões</title>
           <content>
-            <para>{5}</para>
+            <para><#=feature.GUI#></para>
           </content>
         </section>
+	  <#}#>
+	  <#if (!String.IsNullOrEmpty(feature.Notes)){#>
         <section address="SubSection2">
           <title>Notas Internas de Implementação</title>
           <content>
-            <para>{6}</para>
+            <para><#=feature.Notes#></para>
           </content>
         </section>
+	  <#}#>
       </sections> 
     </section>
     <section address="Scenarios">
       <title>Testes de aceitação</title>
       <content>
         <code language="cenarios">
-          <![CDATA[{7}]]>
+          <![CDATA[<#=feature.Scenarios#>]]>
         </code>
         <para>
-          <link xlink:href="{8}">Tópico Anterior</link> - <link xlink:href="{9}">Tópico Seguinte</link>
+			<#if (previousTopic != null){#><link xlink:href="<#=previousTopic.Id#>">Tópico Anterior</link><#}#> - <#if (nextTopic != null){#><link xlink:href="<#=nextTopic.Id#>">Tópico Seguinte</link><#}#>
         </para>
       </content>
     </section>

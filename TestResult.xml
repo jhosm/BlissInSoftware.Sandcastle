@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\Netdados\DNC-GDS\_Projectos\Papiro\Mainline\Solution\AcceptTests-Papiro.Tests.SpecFlow\bin\Debug\Papiro.Tests.SpecFlow.dll" total="31" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2011-10-25" time="11:13:28">
+  <environment nunit-version="2.5.10.11092" clr-version="2.0.50727.3615" os-version="Microsoft Windows NT 5.1.2600 Service Pack 3" platform="Win32NT" cwd="G:\_Tools\BlissInSoftware.Sandcastle" machine-name="S0146277XP02" user="146277" user-domain="SCENTRAIS" />
+  <culture-info current-culture="pt-PT" current-uiculture="en-US" />
+  <test-suite type="Assembly" name="C:\Netdados\DNC-GDS\_Projectos\Papiro\Mainline\Solution\AcceptTests-Papiro.Tests.SpecFlow\bin\Debug\Papiro.Tests.SpecFlow.dll" executed="True" result="Success" success="True" time="483.730" asserts="0">
+    <results>
+      <test-suite type="Namespace" name="Papiro" executed="True" result="Success" success="True" time="483.683" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="Tests" executed="True" result="Success" success="True" time="483.683" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="SpecFlow" executed="True" result="Success" success="True" time="483.683" asserts="0">
+                <results>
+                  <test-suite type="Namespace" name="Features" executed="True" result="Success" success="True" time="483.683" asserts="0">
+                    <results>
+                      <test-suite type="Namespace" name="Documento" executed="True" result="Success" success="True" time="98.139" asserts="0">
+                        <results>
+                          <test-suite type="TestFixture" name="ConsigoAdicionarPropriedadesAUmDocumentoFeature" description="Consigo adicionar propriedades a um documento" executed="True" result="Success" success="True" time="98.124" asserts="0">
+                            <results>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Documento.ConsigoAdicionarPropriedadesAUmDocumentoFeature.AdicionarPropriedadeAUmDocumento" description="Adicionar propriedade a um documento" executed="True" result="Success" success="True" time="74.546" asserts="3">
+                                <categories>
+                                  <category name="SmokeTest" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Documento.ConsigoAdicionarPropriedadesAUmDocumentoFeature.NaoEPossivelAdicionarPropriedadeAUmDocumentoNaoExistente" description="Não é possível adicionar propriedade a um documento não existente" executed="True" result="Success" success="True" time="12.375" asserts="3">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Documento.ConsigoAdicionarPropriedadesAUmDocumentoFeature.NaoEPossivelAdicionarPropriedadeInvalidaAUmDocumento" description="Não é possível adicionar propriedade inválida a um documento" executed="True" result="Success" success="True" time="8.922" asserts="4">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite type="Namespace" name="Multiformatos" executed="True" result="Success" success="True" time="17.297" asserts="0">
+                        <results>
+                          <test-suite type="TestFixture" name="ConsigoConfigurarOsTiposDeFormatoDeDocumentosPorProcessoDeNegocioFeature" description="Consigo configurar os tipos de formato de documentos por processo de negócio" executed="True" result="Success" success="True" time="12.406" asserts="0">
+                            <results>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Multiformatos.ConsigoConfigurarOsTiposDeFormatoDeDocumentosPorProcessoDeNegocioFeature.AssociarUmDocumentoComFicheiroDeFormatoNaoAceite" description="Associar um documento com ficheiro de formato não aceite" executed="True" result="Success" success="True" time="4.031" asserts="5">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Multiformatos.ConsigoConfigurarOsTiposDeFormatoDeDocumentosPorProcessoDeNegocioFeature.NaoEPossivelAdicionarDocumentoComMultiplosFicheirosNaoTiff" description="Não é possível adicionar documento com múltiplos ficheiros não tiff" executed="True" result="Success" success="True" time="8.359" asserts="5">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="ConsigoProcessarPDFsComUmaSoPaginaFeature" description="Consigo processar PDFs com uma só página" executed="True" result="Success" success="True" time="4.891" asserts="0">
+                            <results>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Multiformatos.ConsigoProcessarPDFsComUmaSoPaginaFeature.AdicionarDocumentoComFicheiroPDF" description="Adicionar documento com ficheiro PDF" executed="True" result="Success" success="True" time="4.891" asserts="3">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite type="Namespace" name="Notificacoes" executed="True" result="Success" success="True" time="220.153" asserts="0">
+                        <results>
+                          <test-suite type="TestFixture" name="IdentificarAsAlteracoesOcorridasEmProcessoDocumental_Feature" description="Identificar as alterações ocorridas em processo documental." executed="True" result="Success" success="True" time="32.171" asserts="0">
+                            <categories>
+                              <category name="US251" />
+                            </categories>
+                            <results>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Notificacoes.IdentificarAsAlteracoesOcorridasEmProcessoDocumental_Feature.IdentificoQuaisAsAlteracoesOcorridasPorDocumento" description="Identifico quais as alterações ocorridas por documento" executed="True" result="Success" success="True" time="18.625" asserts="7">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Notificacoes.IdentificarAsAlteracoesOcorridasEmProcessoDocumental_Feature.IdentificoQuaisAsAlteracoesOcorridasPorTipoDeDocumento" description="Identifico quais as alterações ocorridas por tipo de documento" executed="True" result="Success" success="True" time="13.547" asserts="13">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="IndicacaoDeUmServicoASerNotificadoQuandoOcorremRecalculosCriarRemoverValidarDeEstadoFeature" description="Indicação de um serviço a ser notificado quando ocorrem recálculos (Criar, remover, validar) de estado" executed="True" result="Success" success="True" time="10.390" asserts="0">
+                            <results>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Notificacoes.IndicacaoDeUmServicoASerNotificadoQuandoOcorremRecalculosCriarRemoverValidarDeEstadoFeature.EspecificadoOServicoDeEnvioDeNotificacao" description="Especificado o serviço de envio de notificação" executed="True" result="Success" success="True" time="10.375" asserts="3">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="InformacaoSobreAsAlteracoesDeUmDadoProcessoDocumentalFeature" description="Informação sobre as alterações de um dado processo documental" executed="True" result="Success" success="True" time="136.498" asserts="0">
+                            <categories>
+                              <category name="US250" />
+                            </categories>
+                            <results>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Notificacoes.InformacaoSobreAsAlteracoesDeUmDadoProcessoDocumentalFeature.DespoletarNotificacoesParaEstadosEspecificadosDeDocumentos" description="Despoletar notificações para estados especificados (de documentos)" executed="True" result="Success" success="True" time="15.015" asserts="5">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Notificacoes.InformacaoSobreAsAlteracoesDeUmDadoProcessoDocumentalFeature.DespoletarNotificacoesParaEstadosEspecificadosDeTiposDeDocumentos" description="Despoletar notificações para estados especificados (de tipos de documentos)" executed="True" result="Success" success="True" time="10.875" asserts="5">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Notificacoes.InformacaoSobreAsAlteracoesDeUmDadoProcessoDocumentalFeature.NaoDespoletarNotificacoesEmEstadosNaoEspecificadosDeDocumentos" description="Não despoletar notificações em estados não especificados (de documentos)" executed="True" result="Success" success="True" time="35.812" asserts="3">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Notificacoes.InformacaoSobreAsAlteracoesDeUmDadoProcessoDocumentalFeature.NaoDespoletarNotificacoesParaDocumentosDeQueNaoQueroSerNotificado" description="Não despoletar notificações para documentos de que não quero ser notificado" executed="True" result="Success" success="True" time="42.062" asserts="3">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Notificacoes.InformacaoSobreAsAlteracoesDeUmDadoProcessoDocumentalFeature.NaoDespoletarNotificacoesParaEstadosNaoEspecificadosDeTiposDeDocumentos" description="Não despoletar notificações para estados não especificados (de tipos de documentos)" executed="True" result="Success" success="True" time="32.734" asserts="3">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="NotificacoesDeAlteracoesDeEventosDespoletadosPeloUtilizadorFeature" description="Notificações de alterações de eventos despoletados pelo utilizador" executed="True" result="Success" success="True" time="41.093" asserts="0">
+                            <categories>
+                              <category name="US253" />
+                            </categories>
+                            <results>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.Notificacoes.NotificacoesDeAlteracoesDeEventosDespoletadosPeloUtilizadorFeature.NaoDespoletarNotificacoesQuandoOEventoEDespoletadoPorMim" description="Não despoletar notificações quando o evento é despoletado por mim" executed="True" result="Success" success="True" time="41.093" asserts="3">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite type="Namespace" name="ProcessoDocumental" executed="True" result="Success" success="True" time="148.062" asserts="0">
+                        <results>
+                          <test-suite type="TestFixture" name="AssociarUmNovoDocumentoAUmProcessoDocumentalFeature" description="Associar um novo documento a um Processo Documental" executed="True" result="Success" success="True" time="40.140" asserts="0">
+                            <results>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.AssociarUmNovoDocumentoAUmProcessoDocumentalFeature.AdicionarDocumento" description="Adicionar documento" executed="True" result="Success" success="True" time="27.062" asserts="3">
+                                <categories>
+                                  <category name="SmokeTest" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.AssociarUmNovoDocumentoAUmProcessoDocumentalFeature.AdicionarDocumentoEEnviar" description="Adicionar documento e enviar" executed="True" result="Success" success="True" time="5.031" asserts="2">
+                                <categories>
+                                  <category name="SmokeTest" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.AssociarUmNovoDocumentoAUmProcessoDocumentalFeature.NaoEPossivelAdicionarDocumentoComDossierInvalido" description="Não é possível adicionar documento com dossier inválido" executed="True" result="Success" success="True" time="2.891" asserts="5">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.AssociarUmNovoDocumentoAUmProcessoDocumentalFeature.NaoEPossivelAdicionarDocumentoComFicheiroSemConteudo" description="Não é possível adicionar documento com ficheiro sem conteúdo" executed="True" result="Success" success="True" time="2.641" asserts="5">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.AssociarUmNovoDocumentoAUmProcessoDocumentalFeature.NaoEPossivelAdicionarDocumentoDeUmTipoDeDocumentoInvalido" description="Não é possível adicionar documento de um tipo de documento inválido" executed="True" result="Success" success="True" time="2.516" asserts="5">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="ConsigoCorrigirUmDocumentoFeature" description="Consigo corrigir um documento" executed="True" result="Success" success="True" time="22.656" asserts="0">
+                            <results>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.ConsigoCorrigirUmDocumentoFeature.CorrigirApenasUmDocumento" description="Corrigir apenas um documento" executed="True" result="Success" success="True" time="10.937" asserts="2">
+                                <categories>
+                                  <category name="SmokeTest" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.ConsigoCorrigirUmDocumentoFeature.CorrigirTodosOsDocumentos" description="Corrigir todos os documentos" executed="True" result="Success" success="True" time="11.719" asserts="2">
+                                <categories>
+                                  <category name="SmokeTest" />
+                                </categories>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="ConsigoDevolverUmDocumentoFeature" description="Consigo devolver um documento" executed="True" result="Success" success="True" time="10.814" asserts="0">
+                            <results>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.ConsigoDevolverUmDocumentoFeature.DevolverUmDocumento" description="Devolver um documento" executed="True" result="Success" success="True" time="10.814" asserts="2">
+                                <categories>
+                                  <category name="SmokeTest" />
+                                </categories>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="ConsigoValidarUmDocumentoFeature" description="Consigo validar um documento" executed="True" result="Success" success="True" time="65.069" asserts="0">
+                            <results>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.ConsigoValidarUmDocumentoFeature.RevalidarApenasUmDocumento" description="Revalidar apenas um documento" executed="True" result="Success" success="True" time="20.658" asserts="2">
+                                <categories>
+                                  <category name="SmokeTest" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.ConsigoValidarUmDocumentoFeature.RevalidarTodosOsDocumentos" description="Revalidar todos os documentos" executed="True" result="Success" success="True" time="22.831" asserts="2">
+                                <categories>
+                                  <category name="SmokeTest" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.ConsigoValidarUmDocumentoFeature.ValidarApenasUmDocumento" description="Validar apenas um documento" executed="True" result="Success" success="True" time="12.823" asserts="2">
+                                <categories>
+                                  <category name="SmokeTest" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.ConsigoValidarUmDocumentoFeature.ValidarTodosOsDocumentos" description="Validar todos os documentos" executed="True" result="Success" success="True" time="8.757" asserts="2">
+                                <categories>
+                                  <category name="SmokeTest" />
+                                </categories>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="CriarProcessoDocumentalFeature" description="Criar Processo Documental" executed="True" result="Success" success="True" time="3.612" asserts="0">
+                            <results>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.CriarProcessoDocumentalFeature.CriarProcesso" description="Criar processo" executed="True" result="Success" success="True" time="1.579" asserts="2">
+                                <categories>
+                                  <category name="SmokeTest" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.CriarProcessoDocumentalFeature.NaoEPossivelCriarProcessoDocumentalComDossierInvalido" description="Não é possível criar Processo Documental com dossier inválido" executed="True" result="Success" success="True" time="2.017" asserts="2">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="ObterFicheiroZipComDocumentosDoArquivoDigitalFeature" description="Obter ficheiro zip com documentos do arquivo digital" executed="True" result="Success" success="True" time="5.755" asserts="0">
+                            <results>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.ObterFicheiroZipComDocumentosDoArquivoDigitalFeature.NaoObtenhoZipDeDocumentosQuandoProcessoNaoEstaEmArquivo" description="Não obtenho zip de documentos quando processo não está em arquivo" executed="True" result="Success" success="True" time="4.535" asserts="2">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                              <test-case name="Papiro.Tests.SpecFlow.Features.ProcessoDocumental.ObterFicheiroZipComDocumentosDoArquivoDigitalFeature.ObtenhoZipDeDocumentosQuandoProcessoEstaEmArquivo" description="Obtenho zip de documentos quando processo está em arquivo" executed="True" result="Success" success="True" time="1.220" asserts="3">
+                                <categories>
+                                  <category name="Automated" />
+                                </categories>
+                              </test-case>
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

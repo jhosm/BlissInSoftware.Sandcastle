@@ -14,6 +14,9 @@
       <title>Funcionalidades</title>
       <content>
         {3}
+        <para>
+          <link xlink:href="{4}">Tópico Anterior</link> - <link xlink:href="{5}">Tópico Seguinte</link>
+        </para>
       </content>
     </section>
   </developerConceptualDocument>

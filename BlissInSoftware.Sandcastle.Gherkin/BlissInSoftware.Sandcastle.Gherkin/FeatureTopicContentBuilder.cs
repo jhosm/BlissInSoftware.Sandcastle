@@ -90,13 +90,8 @@ namespace BlissInSoftware.Sandcastle.Gherkin
 
         private string ExtractDescriptionSection(string description, string subsectionName)
         {
-            return ExtractDescriptionSection(description, subsectionName, rm.GetString("FeatureTopicContent_NASection", cultureInfo));
-        }
-
-        private string ExtractDescriptionSection(string description, string subsectionName, string defaultResult)
-        {
             string[] descriptionLines = description.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-            string result = defaultResult;
+            string result = "";
             string[] subsectionNames = rm.GetString("FeatureTopicContent_SubSectionNames", cultureInfo).Split(';');
             int subsectionFirstLine = -1;
             for (int i = 0; i < descriptionLines.Length; i++)
@@ -104,13 +99,11 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                 if (subsectionName == null)
                 {
                     subsectionFirstLine = i;
-                    result = "";
                     break;
                 }
                 if (subsectionNames.Any(x => descriptionLines[i].StartsWith(subsectionName)))
                 {
                     subsectionFirstLine = i + 1;
-                    result = "";
                     break;
                 }
             }

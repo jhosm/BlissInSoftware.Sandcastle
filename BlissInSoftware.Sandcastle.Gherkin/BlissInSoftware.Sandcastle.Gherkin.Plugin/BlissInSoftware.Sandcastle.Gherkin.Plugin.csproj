@@ -62,6 +62,11 @@
   <ItemGroup>
     <Compile Include="ContentGenerator.cs" />
     <Compile Include="FeatureContentCreator.cs" />
+    <Compile Include="FeatureTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeatureTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="GherkinFeaturesConfigDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +79,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="BlissInSoftware.Sandcastle.snk" />
+    <None Include="FeatureTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>FeatureTemplate.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\resources\Resources.pt-PT.resx">
@@ -92,7 +101,9 @@
       <Name>BlissInSoftware.Sandcastle.Gherkin</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>Copy /y "$(TargetPath)" "$(TargetDir)$(TargetName).plugins"</PostBuildEvent>

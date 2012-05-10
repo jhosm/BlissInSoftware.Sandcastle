@@ -12,7 +12,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D4F8204A-F0BA-4D53-8A2B-4F3BF23B207B}"
 	ProjectSection(SolutionItems) = preProject
 		resources\FeatureSetTopicTemplate.aml = resources\FeatureSetTopicTemplate.aml
-		resources\FeatureTopicTemplate.aml = resources\FeatureTopicTemplate.aml
 	EndProjectSection
 EndProject
 Global
