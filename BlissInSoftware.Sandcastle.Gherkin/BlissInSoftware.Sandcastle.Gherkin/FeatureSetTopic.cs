@@ -11,7 +11,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin
 {
     public class FeatureSetTopic : Topic
     {
-        public string CustomTopic { get; set; }
+        public FeatureTopic CustomTopic { get; set; }
         public string Introduction { get; set; }
 
         IDictionary<Type, string> featureSetDocumentation = new Dictionary<Type, string>();
@@ -33,25 +33,15 @@ namespace BlissInSoftware.Sandcastle.Gherkin
 
         public override void Load()
         {
-            string customTopicPath = Path.Combine(SourcePath, "Index.aml");
+            Introduction = "";
+            string customTopicPath = Path.Combine(SourcePath, "index.feature");
             if (File.Exists(customTopicPath))
             {
-                CustomTopic = File.ReadAllText(customTopicPath);
-                XmlDocument root = new XmlDocument();
-                root.LoadXml(CustomTopic);
-                Id = root.DocumentElement.Attributes["id"].Value;
+                CustomTopic = (FeatureTopic)Topic.Create(TopicType.Feature, Id, Title, customTopicPath, Language);
+                CustomTopic.Load();
             }
 
             featureSetDocumentation = new Dictionary<Type, string>();
-
-            if (File.Exists(Path.Combine(SourcePath, "Introduction.aml")))
-            {
-                Introduction = File.ReadAllText(Path.Combine(SourcePath, "Introduction.aml"));
-            }
-            else
-            {
-                Introduction = Title;
-            }
 
             IEnumerable<FeatureSetTopic> featureSetTopics = Children.OfType<FeatureSetTopic>();
             if (featureSetTopics.Count() > 0)

@@ -1,21 +1,22 @@
+﻿<#@ template language="C#" #>
 <?xml version="1.0" encoding="utf-8"?>
-<topic id="{0}" revisionNumber="1">
+<topic id="<#=featureSet.Id#>" revisionNumber="1">
   <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ghk="http://schemas.blissinsoftware.com/gherkin/2011/1">
     <introduction>
-      <para>{1}</para>
+      <para><#=featureSet.Introduction#></para>
     </introduction>
     <section address="FeatureSets">
       <title>Temas</title>
       <content>
-        <list class="bullet">{2}</list>
+        <list class="bullet"><#=featureSet.FeatureSetTopics#></list>
       </content>
     </section>
 	<section address="Features">
       <title>Funcionalidades</title>
       <content>
-        {3}
+        <#=featureSet.FeatureTopics#>
         <para>
-          &lt;- <link xlink:href="{4}">Tópico Anterior</link> | <link xlink:href="{5}">Tópico Seguinte</link> -&gt;
+			<#if (previousTopic != null) {#>&lt;- <link xlink:href="<#=previousTopic.Id#>">Tópico Anterior</link><#}#> | <#if (nextTopic != null){#><link xlink:href="<#=nextTopic.Id#>">Tópico Seguinte</link> -&gt;<#}#>
         </para>
       </content>
     </section>

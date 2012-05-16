@@ -951,7 +951,7 @@
 	<!-- Languages syntax specification -->
 	<languages>
 		<!-- Gherkin language specification -->
-		<language id="gherkin" tabSize="4" name="Gherkin">
+		<language id="gherkin" tabSize="4" name="Descrição dos diversos cenários de utilização">
 			<!-- Code contexts: default (most common) is code. -->
 			<contexts default="code">
 				<!-- basic source code context -->

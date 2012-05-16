@@ -12,168 +12,89 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
     using System;
     
     
-    #line 1 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
+    #line 1 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureSetTemplate.tt"
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "10.0.0.0")]
-    public partial class FeatureTemplate : FeatureTemplateBase
+    public partial class FeatureSetTemplate : FeatureSetTemplateBase
     {
         public virtual string TransformText()
         {
             this.Write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<topic id=\"");
             
-            #line 3 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(feature.Id));
+            #line 3 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureSetTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(featureSet.Id));
             
             #line default
             #line hidden
-            this.Write(@""" revisionNumber=""1"">
-  <developerConceptualDocument xmlns=""http://ddue.schemas.microsoft.com/authoring/2003/5"" xmlns:xlink=""http://www.w3.org/1999/xlink"" xmlns:ghk=""http://schemas.blissinsoftware.com/gherkin/2011/1"">
-    <introduction>
-      <para></para>
-    </introduction>
-    <section address=""Description"">
-      <title>Descrição</title>
-      <content>
-        <definitionTable>
-			<definedTerm>");
+            this.Write("\" revisionNumber=\"1\">\r\n  <developerConceptualDocument xmlns=\"http://ddue.schemas." +
+                    "microsoft.com/authoring/2003/5\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns" +
+                    ":ghk=\"http://schemas.blissinsoftware.com/gherkin/2011/1\">\r\n    <introduction>\r\n " +
+                    "     <para>");
             
-            #line 12 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(feature.Name));
+            #line 6 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureSetTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(featureSet.Introduction));
             
             #line default
             #line hidden
-            this.Write("</definedTerm>\r\n\t\t\t<definition>");
+            this.Write("</para>\r\n    </introduction>\r\n    <section address=\"FeatureSets\">\r\n      <title>T" +
+                    "emas</title>\r\n      <content>\r\n        <list class=\"bullet\">");
             
-            #line 13 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(feature.Summary));
-            
-            #line default
-            #line hidden
-            this.Write("</definition>\r\n\t\t</definitionTable>\r\n\t\t<para>");
-            
-            #line 15 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(feature.Description));
+            #line 11 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureSetTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(featureSet.FeatureSetTopics));
             
             #line default
             #line hidden
-            this.Write("</para>\r\n      </content>\r\n      <sections>\r\n\t  ");
+            this.Write("</list>\r\n      </content>\r\n    </section>\r\n\t<section address=\"Features\">\r\n      <" +
+                    "title>Funcionalidades</title>\r\n      <content>\r\n        ");
             
-            #line 18 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-if (!String.IsNullOrEmpty(feature.Rules)){
-            
-            #line default
-            #line hidden
-            this.Write("        <section address=\"SubSection1\">\r\n          <title>Regras e Validações</ti" +
-                    "tle>\r\n          <content>\r\n            <para>");
-            
-            #line 22 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(feature.Rules));
+            #line 17 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureSetTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(featureSet.FeatureTopics));
             
             #line default
             #line hidden
-            this.Write("</para>\r\n          </content>\r\n        </section>\r\n\t  ");
+            this.Write("\r\n        <para>\r\n\t\t\t");
             
-            #line 25 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("\t  ");
-            
-            #line 26 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-if (!String.IsNullOrEmpty(feature.GUI)){
-            
-            #line default
-            #line hidden
-            this.Write("        <section address=\"SubSection2\">\r\n          <title>Ecrãs/Impressões</title" +
-                    ">\r\n          <content>\r\n            <para>");
-            
-            #line 30 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(feature.GUI));
-            
-            #line default
-            #line hidden
-            this.Write("</para>\r\n          </content>\r\n        </section>\r\n\t  ");
-            
-            #line 33 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("\t  ");
-            
-            #line 34 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-if (!String.IsNullOrEmpty(feature.Notes)){
-            
-            #line default
-            #line hidden
-            this.Write("        <section address=\"SubSection2\">\r\n          <title>Notas Internas de Imple" +
-                    "mentação</title>\r\n          <content>\r\n            <para>");
-            
-            #line 38 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(feature.Notes));
-            
-            #line default
-            #line hidden
-            this.Write("</para>\r\n          </content>\r\n        </section>\r\n\t  ");
-            
-            #line 41 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("      </sections> \r\n    </section>\r\n    <section address=\"Scenarios\">\r\n      <tit" +
-                    "le>Cenários de Utilização</title>\r\n      <content>\r\n        <code language=\"cena" +
-                    "rios\">\r\n          <![CDATA[");
-            
-            #line 48 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(feature.Scenarios));
-            
-            #line default
-            #line hidden
-            this.Write("]]>\r\n        </code>\r\n        <para>\r\n\t\t\t");
-            
-            #line 51 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
-if (previousTopic != null){
+            #line 19 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureSetTemplate.tt"
+if (previousTopic != null) {
             
             #line default
             #line hidden
             this.Write("&lt;- <link xlink:href=\"");
             
-            #line 51 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
+            #line 19 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureSetTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(previousTopic.Id));
             
             #line default
             #line hidden
             this.Write("\">Tópico Anterior</link>");
             
-            #line 51 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
+            #line 19 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureSetTemplate.tt"
 }
             
             #line default
             #line hidden
             this.Write(" | ");
             
-            #line 51 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
+            #line 19 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureSetTemplate.tt"
 if (nextTopic != null){
             
             #line default
             #line hidden
             this.Write("<link xlink:href=\"");
             
-            #line 51 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
+            #line 19 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureSetTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(nextTopic.Id));
             
             #line default
             #line hidden
             this.Write("\">Tópico Seguinte</link> -&gt;");
             
-            #line 51 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureTemplate.tt"
+            #line 19 "C:\NETDADOS\DNC-GDS\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Plugin\FeatureSetTemplate.tt"
 }
             
             #line default
             #line hidden
             this.Write("        </para>\r\n      </content>\r\n    </section>\r\n  </developerConceptualDocumen" +
-                    "t>\r\n</topic>\r\n");
+                    "t>\r\n</topic>");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -185,7 +106,7 @@ if (nextTopic != null){
     /// Base class for this transformation
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "10.0.0.0")]
-    public class FeatureTemplateBase
+    public class FeatureSetTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

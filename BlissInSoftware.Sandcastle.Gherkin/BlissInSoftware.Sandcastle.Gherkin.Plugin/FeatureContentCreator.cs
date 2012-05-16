@@ -15,19 +15,31 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
 
         public string Visit(FeatureSetTopic featureSet, Topic nextTopic, Topic previousTopic)
         {
-            if(!String.IsNullOrEmpty(featureSet.CustomTopic)) {
-                return featureSet.CustomTopic;
+            if(featureSet.CustomTopic != null) {
+                FeatureTemplate featureTemplate = new FeatureTemplate(featureSet.CustomTopic, nextTopic, previousTopic);
+                return featureTemplate.TransformText(); 
             }
-            string topicTemplate = System.Text.UTF8Encoding.UTF8.GetString((byte[])rm.GetObject("FeatureSetTopicTemplate"));
-            var previousTopicId = previousTopic == null ? featureSet.Id : previousTopic.Id;
-            var nextTopicId = nextTopic == null ? featureSet.Id : nextTopic.Id;
-            return String.Format(CultureInfo.CurrentCulture, topicTemplate, featureSet.Id, featureSet.Introduction, featureSet.FeatureSetTopics, featureSet.FeatureTopics, previousTopicId, nextTopicId);
+            FeatureSetTemplate featureSetTemplate = new FeatureSetTemplate(featureSet, nextTopic, previousTopic);
+            return featureSetTemplate.TransformText();
         }
 
         public string Visit(FeatureTopic feature, Topic nextTopic, Topic previousTopic)
         {
             FeatureTemplate page = new FeatureTemplate(feature, nextTopic, previousTopic);
             return page.TransformText();
+        }
+    }
+
+    public partial class FeatureSetTemplate
+    {
+        public FeatureSetTopic featureSet;
+        public Topic nextTopic;
+        public Topic previousTopic;
+        public FeatureSetTemplate(FeatureSetTopic featureSet, Topic nextTopic, Topic previousTopic)
+        {
+            this.featureSet = featureSet;
+            this.nextTopic = nextTopic;
+            this.previousTopic = previousTopic;
         }
     }
 

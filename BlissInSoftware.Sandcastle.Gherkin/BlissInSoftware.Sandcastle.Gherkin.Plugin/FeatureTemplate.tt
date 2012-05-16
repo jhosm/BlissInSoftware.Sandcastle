@@ -3,15 +3,16 @@
 <topic id="<#=feature.Id#>" revisionNumber="1">
   <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ghk="http://schemas.blissinsoftware.com/gherkin/2011/1">
     <introduction>
-      <definitionTable>
-        <definedTerm><#=feature.Name#></definedTerm>
-        <definition><#=feature.Summary#></definition>
-      </definitionTable>
+      <para></para>
     </introduction>
     <section address="Description">
-      <title>Descrição da funcionalidade pretendida na aplicação</title>
+      <title>Descrição</title>
       <content>
-        <para><#=feature.Description#></para>
+        <definitionTable>
+			<definedTerm><#=feature.Name#></definedTerm>
+			<definition><#=feature.Summary#></definition>
+		</definitionTable>
+		<para><#=feature.Description#></para>
       </content>
       <sections>
 	  <#if (!String.IsNullOrEmpty(feature.Rules)){#>
@@ -41,13 +42,13 @@
       </sections> 
     </section>
     <section address="Scenarios">
-      <title>Testes de aceitação</title>
+      <title>Cenários de Utilização</title>
       <content>
         <code language="cenarios">
           <![CDATA[<#=feature.Scenarios#>]]>
         </code>
         <para>
-			<#if (previousTopic != null){#><link xlink:href="<#=previousTopic.Id#>">Tópico Anterior</link><#}#> - <#if (nextTopic != null){#><link xlink:href="<#=nextTopic.Id#>">Tópico Seguinte</link><#}#>
+			<#if (previousTopic != null){#>&lt;- <link xlink:href="<#=previousTopic.Id#>">Tópico Anterior</link><#}#> | <#if (nextTopic != null){#><link xlink:href="<#=nextTopic.Id#>">Tópico Seguinte</link> -&gt;<#}#>
         </para>
       </content>
     </section>

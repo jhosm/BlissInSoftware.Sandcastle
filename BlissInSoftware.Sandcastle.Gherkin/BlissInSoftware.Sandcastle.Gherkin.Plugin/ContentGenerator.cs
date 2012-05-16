@@ -70,6 +70,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
 
             foreach (string featureFile in Directory.EnumerateFiles(parentPath, "*.feature"))
             {
+                if (Path.GetFileNameWithoutExtension(featureFile).ToLower() == "index") continue;
                 builder.ReportProgress("Feature: " + featureFile);
                 Topic currentTopic = Topic.Create(TopicType.Feature, CreateTopicId(featureFile), Path.GetFileNameWithoutExtension(featureFile), featureFile, gherkinFeaturesLanguage);
                 parentTopic.Children.Add(currentTopic);
