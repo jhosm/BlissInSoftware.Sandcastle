@@ -1,7 +1,7 @@
 ﻿<#@ template language="C#" #>
 <?xml version="1.0" encoding="utf-8"?>
 <topic id="<#=feature.Id#>" revisionNumber="1">
-  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ghk="http://schemas.blissinsoftware.com/gherkin/2011/1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ghk="http://schemas.blissinsoftware.com/gherkin/2011/1" xmlns:xsd="http://schemas.xsddoc.codeplex.com/schemaDoc/2009/3">
     <introduction>
       <para></para>
     </introduction>
