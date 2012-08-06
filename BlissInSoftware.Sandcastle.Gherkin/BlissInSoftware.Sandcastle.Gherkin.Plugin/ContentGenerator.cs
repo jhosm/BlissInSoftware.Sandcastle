@@ -22,7 +22,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
         public string ContentFile { get; private set; }
         public string TopicsFolder { get; private set; }
         public string TopicIndexPath { get { return Path.Combine(TopicsFolder, "topicIndex.txt"); } }
-        public List<string> TopicFiles { get; private set; }
+        public List<Topic> Topics { get; private set; }
         public Topic RootTopic { get; private set; }
         
         public ContentGenerator(BuildProcess builder, string gherkinFeaturesPath, CultureInfo gherkinFeaturesLanguage)
@@ -51,7 +51,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             using (md5 = HashAlgorithm.Create("MD5"))
             {
 
-                RootTopic = Topic.Create(TopicType.FeatureSet, CreateTopicId("Documentação Funcional"), "Documentação Funcional", gherkinFeaturesPath, gherkinFeaturesLanguage);
+                RootTopic = Topic.Create(TopicType.FeatureSet, CreateTopicId("Documentação Funcional"), "Documentação Funcional", gherkinFeaturesPath, gherkinFeaturesLanguage, builder.ProjectFolder);
                 BuildTopicsTree(gherkinFeaturesPath, RootTopic);
             }
             RootTopic.Load();
@@ -63,7 +63,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             foreach (string featureSet in Directory.EnumerateDirectories(parentPath))
             {
                 builder.ReportProgress("Feature set: " + featureSet);
-                Topic currentTopic = Topic.Create(TopicType.FeatureSet, CreateTopicId(featureSet),Path.GetFileName(featureSet), featureSet, gherkinFeaturesLanguage);
+                Topic currentTopic = Topic.Create(TopicType.FeatureSet, CreateTopicId(featureSet),Path.GetFileName(featureSet), featureSet, gherkinFeaturesLanguage, builder.ProjectFolder);
                 parentTopic.Children.Add(currentTopic);
                 BuildTopicsTree(featureSet, currentTopic);
             }
@@ -72,7 +72,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             {
                 if (Path.GetFileNameWithoutExtension(featureFile).ToLower() == "index") continue;
                 builder.ReportProgress("Feature: " + featureFile);
-                Topic currentTopic = Topic.Create(TopicType.Feature, CreateTopicId(featureFile), Path.GetFileNameWithoutExtension(featureFile), featureFile, gherkinFeaturesLanguage);
+                Topic currentTopic = Topic.Create(TopicType.Feature, CreateTopicId(featureFile), Path.GetFileNameWithoutExtension(featureFile), featureFile, gherkinFeaturesLanguage, builder.ProjectFolder);
                 parentTopic.Children.Add(currentTopic);
             }
         }
@@ -131,7 +131,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
         private void GenerateTopicFiles()
         {
             Directory.CreateDirectory(TopicsFolder);
-            TopicFiles = new List<string>();
+            Topics = new List<Topic>();
             GenerateTopicFiles( new Topic[1] {RootTopic}, null, null);
         }
 
@@ -221,7 +221,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
         private void AddTopicFile(Topic topic)
         {
             topic.FileName = GetAbsoluteFileName(TopicsFolder, topic);
-            TopicFiles.Add(topic.FileName);
+            Topics.Add(topic);
 
             builder.ReportProgress("Adding topic file titled '{0}' to '{1}'...", topic.Title, topic.FileName);
         }

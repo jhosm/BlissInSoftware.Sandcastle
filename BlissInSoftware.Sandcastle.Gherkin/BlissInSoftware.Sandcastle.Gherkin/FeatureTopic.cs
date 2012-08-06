@@ -81,6 +81,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                 Notes = builder.BuildNotes();
                 Scenarios = builder.BuildBackground();
                 Scenarios += builder.BuildScenarios();
+                ReferencedImagesPaths = builder.BuildImages(ProjectFolder);
 
                 contentIsCreated = true;
             }

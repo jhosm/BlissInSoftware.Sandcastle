@@ -216,8 +216,10 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
 
             AddLinkedItem(BuildAction.ContentLayout, contentGenerator.ContentFile);
 
-            foreach (var topicFileName in contentGenerator.TopicFiles)
-                AddLinkedItem(BuildAction.None, topicFileName);
+            foreach (var topic in contentGenerator.Topics)
+            {
+                AddTopicItemToProject(BuildAction.None, topic);
+            }
 
             var componentConfig = GetComponentConfiguration(contentGenerator.TopicIndexPath);
             builder.CurrentProject.ComponentConfigurations.Add(GetComponentId(), true, componentConfig);
@@ -245,13 +247,38 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Plugin
             return componentConfig;
         }
 
+        private ProjectItem AddTopicItemToProject(BuildAction buildAction, Topic topic)
+        {
+            var project = builder.CurrentProject.MSBuildProject;
+            var itemName = buildAction.ToString();
+            builder.ReportProgress("Adding itemName {0} located at {1} to project...", itemName, topic.FileName);
+            var buildItems = project.AddItem(itemName, topic.FileName, new[] { new KeyValuePair<string, string>("Link", topic.FileName) });
+            foreach (string imagePath in topic.ReferencedImagesPaths)
+            {
+                string imageId = Path.GetFileNameWithoutExtension(imagePath);
+                bool imageIdAlreadyExists = false;
+                foreach (ProjectItem image in project.GetItems(BuildAction.Image.ToString()))
+                {
+                    
+                    imageIdAlreadyExists = image.GetMetadataValue("ImageId") == imageId;
+                    if (imageIdAlreadyExists) break;
+                }
+                if (imageIdAlreadyExists) {
+                    builder.ReportProgress("Image {0} is already referenced in project...", imagePath);
+                    continue;
+                };
+                builder.ReportProgress("Adding image {0} located at {1} to project...", imageId, imagePath);
+                project.AddItem(BuildAction.Image.ToString(), imagePath, new[] { new KeyValuePair<string, string>("ImageId", imageId), new KeyValuePair<string, string>("AlternateText", imageId) });
+            }
+            return buildItems[0];
+        }
+
         private ProjectItem AddLinkedItem(BuildAction buildAction, string fileName)
         {
             var project = builder.CurrentProject.MSBuildProject;
             var itemName = buildAction.ToString();
             builder.ReportProgress("Adding itemName {0} located at {1} to project...", itemName, fileName);
             var buildItems = project.AddItem(itemName, fileName, new[] { new KeyValuePair<string, string>("Link", fileName) });
-            Debug.Assert(buildItems.Count == 1);
             return buildItems[0];
         }
 

@@ -37,7 +37,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin
             string customTopicPath = Path.Combine(SourcePath, "index.feature");
             if (File.Exists(customTopicPath))
             {
-                CustomTopic = (FeatureTopic)Topic.Create(TopicType.Feature, Id, Title, customTopicPath, Language);
+                CustomTopic = (FeatureTopic)Topic.Create(TopicType.Feature, Id, Title, customTopicPath, Language, ProjectFolder);
                 CustomTopic.Load();
             }
 

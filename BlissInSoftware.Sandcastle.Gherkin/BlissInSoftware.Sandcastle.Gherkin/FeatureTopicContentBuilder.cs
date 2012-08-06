@@ -8,6 +8,8 @@ using gherkin;
 using System.Resources;
 using System.Reflection;
 using System.Globalization;
+using System.Xml;
+using System.IO;
 
 namespace BlissInSoftware.Sandcastle.Gherkin
 {
@@ -114,8 +116,8 @@ namespace BlissInSoftware.Sandcastle.Gherkin
             {
                 var descriptionLine = descriptionLines[i];
                 if (subsectionNames.Any(x => descriptionLine.StartsWith(x))) break;
-                result += descriptionLine; 
-                if(i != descriptionLines.Length - 1) result += Environment.NewLine;
+                result += descriptionLine;
+                if (i != descriptionLines.Length - 1) result += Environment.NewLine;
             }
             while (result.EndsWith(Environment.NewLine))
             {
@@ -143,7 +145,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin
             {
                 if (scenario.Tags != null && scenario.Tags.Count > 0)
                 {
-                        result = InsertTags(result, scenario.Tags) + Environment.NewLine;
+                    result = InsertTags(result, scenario.Tags) + Environment.NewLine;
                 }
 
                 result += scenario.Keyword + ": ";
@@ -153,10 +155,10 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                 {
                     result = BuildScenarioOutline(result, scenarioOutline);
                 }
-               
+
                 result += Environment.NewLine;
             }
-            if (!String.IsNullOrEmpty(result)) result = result.Remove(result.Length - (Environment.NewLine.Length) * 2); 
+            if (!String.IsNullOrEmpty(result)) result = result.Remove(result.Length - (Environment.NewLine.Length) * 2);
             return result;
         }
 
@@ -185,8 +187,8 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                 }
                 if (step.MultiLineTextArgument != null)
                 {
-                    result += 
-                        "        \"\"\"" + Environment.NewLine + 
+                    result +=
+                        "        \"\"\"" + Environment.NewLine +
                         "        " + step.MultiLineTextArgument.Replace(Environment.NewLine, Environment.NewLine + "        ") + Environment.NewLine +
                         "        \"\"\"" + Environment.NewLine;
                 }
@@ -208,7 +210,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin
 
         private Dictionary<int, int> FindEachColumnMaxLength(GherkinTable table)
         {
-            Dictionary<int, int> result = new Dictionary<int,int>();
+            Dictionary<int, int> result = new Dictionary<int, int>();
             for (int i = 0; i < table.Header.Cells.Length; i++)
             {
                 result[i] = table.Header.Cells[i].Value.Length;
@@ -217,7 +219,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                     var cellLength = row.Cells[i].Value.Length;
                     if (cellLength > result[i])
                     {
-                        result[i] = cellLength; 
+                        result[i] = cellLength;
                     }
                 }
             }
@@ -264,6 +266,32 @@ namespace BlissInSoftware.Sandcastle.Gherkin
             return input.Replace(Environment.NewLine, "<markup><br /></markup>");
         }
 
+
+        internal IEnumerable<string> BuildImages(string projectFolder)
+        {
+
+            var result = new List<string>();
+
+            Regex matcher = new Regex("<image placement=\"[^\"]+\" xlink:href=\"([^\"]+)\"/>");
+            MatchCollection imageMatches = matcher.Matches(feature.Description);
+            
+            foreach (Match imageMatch in imageMatches)
+            {
+                var imageId = imageMatch.Groups[1].Value;
+                string[] files = Directory.GetFiles(Path.Combine(projectFolder, "MediaContent"), imageId + ".*", SearchOption.AllDirectories);
+                if (files.Length == 0)
+                {
+                    throw new Exception(string.Format("Did not find any image named '{0}'.", imageId));
+                }
+                if (files.Length > 1)
+                {
+                    throw new Exception(string.Format("Found more than one image named '{0}': {1}.", imageId, string.Join(";", files)));
+                }
+                result.Add(files[0]);
+            }
+
+            return result;
+        }
     }
 }
 
