@@ -1,0 +1,13 @@
+G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Console\bin\Debug\BlissInSoftware.Sandcastle.Gherkin.Console.exe
+G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Console\bin\Debug\BlissInSoftware.Sandcastle.Gherkin.Console.pdb
+G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Console\bin\Debug\BlissInSoftware.Sandcastle.Gherkin.dll
+G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Console\bin\Debug\Gherkin.dll
+G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Console\bin\Debug\TechTalk.SpecFlow.Parser.dll
+G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Console\bin\Debug\IKVM.OpenJDK.Core.dll
+G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Console\bin\Debug\IKVM.Runtime.dll
+G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Console\bin\Debug\IKVM.OpenJDK.Text.dll
+G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Console\bin\Debug\BlissInSoftware.Sandcastle.Gherkin.pdb
+G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Console\bin\Debug\pt-PT\BlissInSoftware.Sandcastle.Gherkin.resources.dll
+G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Console\obj\x86\Debug\ResolveAssemblyReference.cache
+G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Console\obj\x86\Debug\BlissInSoftware.Sandcastle.Gherkin.Console.exe
+G:\_Tools\BlissInSoftware.Sandcastle\BlissInSoftware.Sandcastle.Gherkin\BlissInSoftware.Sandcastle.Gherkin.Console\obj\x86\Debug\BlissInSoftware.Sandcastle.Gherkin.Console.pdb

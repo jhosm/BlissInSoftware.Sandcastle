@@ -10,12 +10,15 @@ using System.Reflection;
 using System.Globalization;
 using System.Xml;
 using System.IO;
+using MarkdownSharp;
 
 namespace BlissInSoftware.Sandcastle.Gherkin
 {
     public class FeatureTopicContentBuilder
     {
         private Feature feature;
+        private string featureSummary;
+        private string featureDescription;
         private const string EXTRACT_DESCRIPTION = @"^(.*?)(?=(?:\r\nRegras:|\r\nGUI:|\r\nNotas:|$))";
         private const string EXTRACT_RULES = @"(?:^|\n)Regras:[\r\n]*\s*(.*?)(?=(?:\r\nGUI:|\r\nNotas:|$))";
         private const string EXTRACT_GUI = @"(?:^|\n)GUI:[\r\n]*\s*(.*?)(?=(?:\r\nNotas:|$))";
@@ -24,15 +27,26 @@ namespace BlissInSoftware.Sandcastle.Gherkin
         ResourceManager rm = new ResourceManager("BlissInSoftware.Sandcastle.Gherkin.Resources", Assembly.GetExecutingAssembly());
         private CultureInfo cultureInfo;
 
-        public FeatureTopicContentBuilder(Feature feature)
+        public FeatureTopicContentBuilder(Feature feature): this(feature,CultureInfo.CurrentCulture)
         {
-            this.cultureInfo = CultureInfo.CurrentCulture;
         }
 
         public FeatureTopicContentBuilder(Feature feature, CultureInfo cultureInfo)
         {
             this.feature = feature;
             this.cultureInfo = cultureInfo;
+            string[] fullDescription = SplitDescription();
+            featureSummary = fullDescription[0];
+            if (fullDescription.Length > 1)
+            {
+                string[] descriptionLines = new string[fullDescription.Length - 1];
+                Array.ConstrainedCopy(fullDescription, 1, descriptionLines, 0, descriptionLines.Length);
+                featureDescription = String.Join(Environment.NewLine + Environment.NewLine, descriptionLines);
+            }
+            else
+            {
+                featureDescription = "";
+            }
         }
 
         public string BuildName()
@@ -40,48 +54,42 @@ namespace BlissInSoftware.Sandcastle.Gherkin
             string result = "";
             result += InsertTags(result, feature.Tags) + Environment.NewLine;
             result += feature.Title;
-            result = ReplaceCrLfWithBrTag(result);
             return result;
         }
 
         public string BuildSummary()
         {
-            string[] fullDescription = SplitDescription();
-            return ReplaceCrLfWithBrTag(fullDescription[0]);
+            Markdown markdown = new Markdown();
+            return markdown.Transform(featureSummary);
         }
 
         public string BuildDescription()
         {
-            string[] fullDescription = SplitDescription();
             string result;
-            if (fullDescription.Length > 1)
+            if (!string.IsNullOrEmpty(featureDescription))
             {
-                string[] descriptionLines = new string[fullDescription.Length - 1];
-                Array.ConstrainedCopy(fullDescription, 1, descriptionLines, 0, descriptionLines.Length);
-
-                result = ExtractDescriptionSection(String.Join(Environment.NewLine, descriptionLines));
-                result = ReplaceCrLfWithBrTag(result);
+                result = ExtractDescriptionSection(featureDescription);
             }
             else
             {
-                result = "O autor desta história considera que não é necessária descrição.";
+                result = "";
             }
             return result;
         }
 
         public string BuildRules()
         {
-            return ExtractDescriptionSection(feature.Description, "Regras:");
+            return ExtractDescriptionSection(featureDescription, "<para>Regras:");
         }
 
         public string BuildGUI()
         {
-            return ExtractDescriptionSection(feature.Description, "GUI:");
+            return ExtractDescriptionSection(featureDescription, "<para>GUI:");
         }
 
         public string BuildNotes()
         {
-            return ExtractDescriptionSection(feature.Description, "Notas:");
+            return ExtractDescriptionSection(featureDescription, "<para>Notas:");
         }
 
 
@@ -109,7 +117,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin
                     break;
                 }
             }
-            if (subsectionFirstLine == -1) return ReplaceCrLfWithBrTag(result);
+            if (subsectionFirstLine == -1) return result;
 
 
             for (int i = subsectionFirstLine; i < descriptionLines.Length; i++)
@@ -123,7 +131,8 @@ namespace BlissInSoftware.Sandcastle.Gherkin
             {
                 result = result.Remove(result.Length - Environment.NewLine.Length);
             }
-            return ReplaceCrLfWithBrTag(result);
+            Markdown markdown = new Markdown();
+            return markdown.Transform(result);
         }
 
         public string BuildBackground()
@@ -261,19 +270,13 @@ namespace BlissInSoftware.Sandcastle.Gherkin
             return result;
         }
 
-        private string ReplaceCrLfWithBrTag(string input)
-        {
-            return input.Replace(Environment.NewLine, "<markup><br /></markup>");
-        }
-
-
         internal IEnumerable<string> BuildImages(string projectFolder)
         {
 
             var result = new List<string>();
 
             Regex matcher = new Regex("<image placement=\"[^\"]+\" xlink:href=\"([^\"]+)\"/>");
-            MatchCollection imageMatches = matcher.Matches(feature.Description);
+            MatchCollection imageMatches = matcher.Matches(featureDescription);
             
             foreach (Match imageMatch in imageMatches)
             {
