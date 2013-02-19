@@ -1023,15 +1023,27 @@ namespace MarkdownSharp
             url = EncodeProblemUrlChars(url);
             url = EscapeBoldItalic(url);
 
-            result = string.Format("<img src=\"{0}\" alt=\"{1}\"", url, alt);
+            result = string.Format("<mediaLink><caption placement=\"after\" lead=\"{0}\">", alt);
 
             if (!String.IsNullOrEmpty(title))
             {
                 title = EscapeBoldItalic(title);
-                result += string.Format(" title=\"{0}\"", title);
+                result += title;
             }
 
-            result += _emptyElementSuffix;
+            result += string.Format("</caption><image placement=\"center\" xlink:href=\"{0}\"/></mediaLink>", url);
+
+
+
+            /*    result = string.Format("<img src=\"{0}\" alt=\"{1}\"", url, alt);
+
+                if (!String.IsNullOrEmpty(title))
+                {
+                    title = EscapeBoldItalic(title);
+                    result += string.Format(" title=\"{0}\"", title);
+                }
+
+                result += _emptyElementSuffix;*/
 
             return result;
         }

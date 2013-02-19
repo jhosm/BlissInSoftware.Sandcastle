@@ -51,7 +51,7 @@ namespace BlissInSoftware.Sandcastle.Gherkin.BuildComponents
 
                 if (!topicIndex.ContainsKey(userStoryId))
                 {
-                    BuildAssembler.MessageHandler(GetType(), MessageLevel.Warn, "Could not find user story with ID " + userStoryId);
+                    BuildAssembler.MessageHandler(GetType(), MessageLevel.Warn, "key", "Could not find user story with ID " + userStoryId);
                 }
                 else
                 {

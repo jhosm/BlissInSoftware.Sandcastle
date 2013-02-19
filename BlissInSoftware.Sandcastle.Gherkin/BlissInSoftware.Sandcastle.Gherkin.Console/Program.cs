@@ -30,7 +30,8 @@ namespace BlissInSoftware.Sandcastle.Gherkin.Console
                 }
             }
 
-            FeatureTopicContentBuilder build = new FeatureTopicContentBuilder(feature, new CultureInfo("en-US")); ;
+            FeatureTopicContentBuilder build = new FeatureTopicContentBuilder(feature, new CultureInfo("en-US")); 
+            string x = build.BuildDescription();
         }
     }
 }

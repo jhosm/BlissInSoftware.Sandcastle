@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BlissInSoftware.Sandcastle.Gherkin.BuildComponents</RootNamespace>
     <AssemblyName>BlissInSoftware.Sandcastle.Gherkin.BuildComponents</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -40,6 +40,9 @@
   <ItemGroup>
     <Reference Include="BuildAssemblerLibrary">
       <HintPath>..\..\lib\Sandcastle\BuildAssemblerLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="BuildComponents">
+      <HintPath>..\..\lib\Sandcastle\BuildComponents.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
